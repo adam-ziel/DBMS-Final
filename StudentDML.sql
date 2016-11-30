@@ -1,7 +1,7 @@
 INSERT INTO Student VALUES (1, “George”, “Lucas”, “CIVE”);
 INSERT INTO Student VALUES (2, “Bobby”, “Laughlin”, “CS”);
 INSERT INTO Student VALUES (3, “Julie”, “Medeiros”, “CN”);
-INSERT INTO Student VALUES (4, “Dave”, “Lee”, “ME”);
+INSERT INTO Student VALUES (4, “David”, “Lee”, “ME”);
 INSERT INTO Student VALUES (5, “Anthony”, “A”, “CS”);
 INSERT INTO Student VALUES (6, “Bachar”, “Al Hardy”, “EM”);
 INSERT INTO Student VALUES (7, “Gregory”, “Butterworth”, “EE”);
@@ -14,3 +14,5 @@ INSERT INTO Student VALUES (13, “Bret”, “Glendye”, “ME”);
 INSERT INTO Student VALUES (14, “Lyn”, “Carswell”, “EE”);
 INSERT INTO Student VALUES (15, “Jojo”, “J”, “EE”);
 INSERT INTO Student VALUES (16, “Abbey”, “Jean”, “AM”);
+INSERT INTO Student VALUES (17, “Luis Jose”, “Bechara Romero”, “CS”);
+INSERT INTO Student VALUES (18, “Jacob”, “Jones”, “CS”);
