@@ -13,4 +13,4 @@ INSERT INTO Student VALUES (12, “Bethy”, “Diakabana”, “CS”);
 INSERT INTO Student VALUES (13, “Bret”, “Glendye”, “ME”);
 INSERT INTO Student VALUES (14, “Lyn”, “Carswell”, “EE”);
 INSERT INTO Student VALUES (15, “Jojo”, “J”, “EE”);
-INSERT INTO Student VALUES (16, “Bret”, “Glendye”, “ME”);
+INSERT INTO Student VALUES (16, “Abbey”, “Jean”, “AM”);
