@@ -16,3 +16,10 @@ INSERT INTO Student VALUES (15, “Jojo”, “J”, “EE”);
 INSERT INTO Student VALUES (16, “Abbey”, “Jean”, “AM”);
 INSERT INTO Student VALUES (17, “Luis Jose”, “Bechara Romero”, “CS”);
 INSERT INTO Student VALUES (18, “Jacob”, “Jones”, “CS”);
+
+
+
+
+
+
+
