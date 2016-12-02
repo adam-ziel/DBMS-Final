@@ -3,7 +3,7 @@ var outputElm = document.getElementById('output');
 var errorElm = document.getElementById('error');
 var dbFileElm = document.getElementById('dbfile');
 
-execBtn.addEventListener("click", query1, true);
+execBtn.addEventListener("click", query4, true);
 
 // Start the worker in which sql.js will run
 var worker = new Worker("worker.sql.js");
@@ -39,6 +39,8 @@ function setQuery(val)
 {  
     noerror();
     
+    document.getElementById("execute").disabled=true;
+    
     // try to get handle to a query-specific form we created
     var paramForm = document.getElementById("form1");
     
@@ -72,25 +74,24 @@ function setQuery(val)
 }
 
 
-/*
- * Retrieves user-input parameter, 
- * executes query,
- * and disables the execute button.
- */
-function query1()
-{
-    var param = document.getElementById("form1").elements[0].value;
-    
-    execute("SELECT Name FROM Major WHERE MajorID=\"" + param + "\"");
-    
-    document.getElementById("execute").disabled=true;
-}
-
 function query2()
 {
     execute("SELECT Name FROM Major");
 }
 
+/*
+ * Retrieves user-input parameter, 
+ * executes query,
+ * and disables the execute button.
+ */
+function query4()
+{
+    var param = document.getElementById("form1").elements[0].value;
+    
+    execute("SELECT * FROM Major WHERE MajorID=\"" + param + "\"");
+    
+//    document.getElementById("execute").disabled=true;
+}
 
 /*
  * Create form element for user to input query parameters
@@ -176,6 +177,7 @@ var tableCreate = function()
         return tbl;
     }
 }();
+
 
 // Performance measurement functions
 var tictime;
