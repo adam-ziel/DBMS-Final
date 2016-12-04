@@ -1,0 +1,1 @@
+INSERT INTO Ebook VALUES(28, "https://app.knovel.com/web/toc.v/cid:kpMHEGMH13/viewerType:toc/root_slug:machinerys-handbook-28th/url_slug:machinerys-handbook-28th/", "Machinery's Handbook 28th ed.", "MANF-2000");
