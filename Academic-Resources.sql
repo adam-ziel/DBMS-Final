@@ -4,7 +4,7 @@ CREATE TABLE `TutorHours` (
 	`Weekday`	TEXT,
 	`StartTime`	INTEGER,
 	`EndTime`	INTEGER,
-	PRIMARY KEY(`StudentID`)
+	FOREIGN KEY ('StudentID') REFERENCES 'Student'('StudentID')
 );
 CREATE TABLE "Tutor" (
 	`StudentID`	INTEGER,
