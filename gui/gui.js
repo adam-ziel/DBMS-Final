@@ -186,8 +186,8 @@ function query1()
     
     var query = "";
     
-//    query += "SELECT Student.FName, Student.LName, Tutor.TutorID, Availability.Weekday, Availability.StartTime, " 
-//           + "Availability.EndTime, Class.Name ";
+//    query += "SELECT Student.FName, Student.LName, Tutor.TutorID, Availability.Weekday, Availability.StartTime, "; 
+//    query += "Availability.EndTime, Class.Name ";
 //    query += "FROM Tutor INNER JOIN Class ON Tutor.ClassID = Class.ClassID ";
 //    query += "INNER JOIN Major ON Major.MajorID = Class.MajorID "
 //    query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID ";
@@ -263,7 +263,16 @@ function query5()
 {   
     var param = document.getElementById("form1").elements[0].value;
     
-    execute("SELECT * FROM Major WHERE MajorID=\"" + param + "\"");
+    var query = "";
+    
+    query += "SELECT Class.ClassID,Class.Name, Faculty.FName, Faculty.LName,Faculty.Rank ";
+    query += "SELECT Class.ClassID,Class.Name, Faculty.FName, Faculty.LName,Faculty.Rank ";
+    query += "FROM Faculty INNER JOIN Class ON Faculty.facultyID = Class.facultyID ";
+    query += "INNER JOIN Software ON Software.ClassID = Class.ClassID ";
+    query += "WHERE Faulty.Rank >= 3 AND Software.Name=\"" + param +"\" ";
+    query += "ORDER BY Faulty.Rank DESC, Class.Name"
+    
+    execute(query);
     
     removeForm();
     
