@@ -8,17 +8,32 @@
 <body>
 	<h1>WIT Academic Resources</h1>
     <main>
-        <p>This database organizes all academic resources available for each course. Resources fall into the categories or office hours, tutoring, online tutorials, eBooks, course reserve textbooks, and software downloads.</p>
+        <p>This database organizes all academic resources available for each course. Resources fall into the categories of office hours, tutoring, Facillitated Study Groups, online tutorials, eBooks, course reserve textbooks, and software downloads.</p>
+        
+<!--
+        <select id="selectCourse">
+            <option id="COMP-1000">COMP-1000 Computer Science I</option>
+            <option id="COMP-1100">COMP-1100 Intro to Networks</option>
+            <option id="COMP-2000">COMP-2000 Data Structures</option>
+        </select>
+-->
         
         <label for='selectQuery'><strong>What would you like to today?</strong></label><br>
         <select onChange="setQuery()" id="selectQuery" disabled>
-            <option value="">--</option>
+            <option>--</option>
+            <option id="browse">Browse resources by course</option>
             <option id="query1">Find all tutors available for your major</option>
             <option id="query2">List all courses in your department in terms of free eBook availabilty</option>
             <option id="query3">Find all tutor times that don't conflict with a course's office hours</option>
             <option id="query4">Find all online tutorials related to a particular course</option>
-            <option id="query5">Find all classes that use a specific software</option>
+            <option id="query5">Find all classes that use a specific software taught by professors with RateMyProfessor ratings above 3.0</option>
         </select><br>
+        
+        <div id='courseDropdownLabel'></div>
+        <div id='courseDropdown'></div>
+        
+        <div id='resourceDropdownLabel'></div>
+        <div id='resourceDropdown'></div>
         
         <div id="param"></div>
 

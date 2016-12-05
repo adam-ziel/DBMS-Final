@@ -3,6 +3,13 @@ var errorElm = document.getElementById('error');
 var dbFileElm = document.getElementById('dbfile');
 var execBtn = document.getElementById('execute');
 
+var courseDropdown = document.getElementById('courseDropdown');
+var courseDropdownLabel = document.getElementById('courseDropdownLabel');
+
+var resourceDropdown = document.getElementById('resourceDropdown');
+var resourceDropdownLabel = document.getElementById('resourceDropdownLabel');
+
+
 var worker = new Worker("worker.sql.js"); // Start the worker in which sql.js will run
 worker.onerror = error;
 
@@ -74,27 +81,35 @@ function setQuery(val)
     
     switch(selection)
     {
+        case "browse":
+            createDropdown(courseDropdown, courseDropdownLabel, "<strong>Select course: </strong>", "dropdown1", displayAll);
+            populateCourseDropdown(dropdown1);
+            break;
         case "query1":
             execBtn.addEventListener("click", query1); 
+            getParameter(selection);
             break;
         case "query2":
             execBtn.addEventListener("click", query2); 
+            getParameter(selection);
             break;
         case "query3":
             execBtn.addEventListener("click", query3);  
+            getParameter(selection);
             break;
         case "query4":
             execBtn.addEventListener("click", query4); 
+            getParameter(selection);
             break;
         case "query5":
-            execBtn.addEventListener("click", query5);   
+            execBtn.addEventListener("click", query5);  
+            getParameter(selection);
             break;
         default:
             break;
     }   
-    
-    getParameter(selection);
 }
+
 
 function removePreviousFormIfExists()
 {
@@ -182,6 +197,88 @@ function addFormToHTML(form)
 }
 
 
+function createDropdown(divDropdown, divLabel, label, id, behavior)
+{
+    var dropdown = document.createElement("select");
+    
+    dropdown.id = id;
+    
+    dropdown.onchange = behavior;
+    
+    
+    labelDropdown(divLabel, label);
+    
+    
+    
+    
+    
+    divDropdown.appendChild(dropdown);
+    
+    
+    //dropdown.addEventListener("change", alert("HiYt"));
+}
+
+function labelDropdown(divLabel, text)
+{
+    divLabel.appendChild(document.createElement("br")); // create new line
+    
+    var dropdownLabel = document.createElement("label"); // create label element
+    
+    dropdownLabel.innerHTML = text; // set its inner HTML
+
+    divLabel.appendChild(dropdownLabel); // append it to the div
+}
+
+function populateCourseDropdown(dropdown1)
+{
+    addOption(dropdown1, "COMP-1000");
+    addOption(dropdown1, "COMP-1100");
+    addOption(dropdown1, "COMP-2000");
+    addOption(dropdown1, "ELEC-3150");
+    addOption(dropdown1, "ELEC-2850");
+    addOption(dropdown1, "MECH-1000");
+}
+
+function populateResourceDropdown(dropdown2)
+{
+    addOption(dropdown2, "Tutor");
+    addOption(dropdown2, "Ebook");
+    addOption(dropdown2, "OnlineTutorial");
+    addOption(dropdown2, "FSG");
+}
+
+function addOption(dropdown, text)
+{
+    var option = document.createElement("option");
+    
+    option.innerHTML = text;
+    
+    dropdown.appendChild(option);
+}
+
+function displayAll()
+{
+    createDropdown(resourceDropdown, resourceDropdownLabel, "<strong>Select resource: </strong>", "dropdown2", courseQuery); 
+    populateResourceDropdown(dropdown2);
+}
+
+function courseQuery()
+{
+    var dropdown = document.getElementById("dropdown1");
+    
+    var course = dropdown.options[dropdown.selectedIndex].text;
+    
+    dropdown = document.getElementById("dropdown2");
+    
+    var resource = dropdown.options[dropdown.selectedIndex].text;
+    
+    var query = "SELECT * FROM " + resource + " WHERE Ebook.ClassID=\"" + course +"\"";
+    
+    alert(query);
+    
+    execute(query);
+}
+
 /*
  * Retrieves user-input parameter, 
  * executes query,
@@ -193,15 +290,15 @@ function query1()
     
     var query = "";
     
-    query += "SELECT Student.FName, Student.LName, Tutor.StudentID, TutorHours.Weekday, TutorHours.StartTime, "; 
-    query += "TutorHours.EndTime, Class.ClassName ";
+    query += "SELECT Student.FName as First_Name, Student.LName as Last_Name, TutorHours.Weekday, ";  
+    query += "TutorHours.StartTime, TutorHours.EndTime, Class.ClassName ";
     query += "FROM Tutor INNER JOIN Class ON Tutor.ClassID = Class.ClassID ";
     query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
     query += "INNER JOIN Major ON Department.DepartmentID = Major.DepartmentID ";
     query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID ";
     query += "INNER JOIN TutorHours ON TutorHours.StudentID = Tutor.StudentID ";
     query += "WHERE Major.MajorID=\"" + param + "\" ";
-    query += "ORDER BY Student.LName, TutorHours.Weekday,TutorHours.StartTime;";
+    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime;";
 
     execute(query);
     
