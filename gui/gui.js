@@ -115,24 +115,24 @@ function getParameter(selection)
     switch(selection)
     {
         case "query1":
-            labelForm(form, "Enter MajorID: ");
+            labelForm(form, "Enter major ID: ");
             addInputElementToForm(form, "MajorID", "BCOS");
             break;
         case "query2":
-            labelForm(form, "Enter major ID: ");
-            addInputElementToForm(form, "MajorID", "BCOS");
+            labelForm(form, "Enter department name: ");
+            addInputElementToForm(form, "DepartmentID", "Computer Science");
             break;
         case "query3":
             labelForm(form, "Enter class ID: ");
             addInputElementToForm(form, "MajorID", "COMP-1000");
             break;
         case "query4":
-            labelForm(form, "Enter major ID: ");
-            addInputElementToForm(form, "MajorID", "BMED");
+            labelForm(form, "Enter course ID: ");
+            addInputElementToForm(form, "MajorID", "COMP-2000");
             break;
         case "query5":
             labelForm(form, "Enter software name: ");
-            addInputElementToForm(form, "MajorID", "Bonjour");
+            addInputElementToForm(form, "MajorID", "Eclipse");
         default:
             break;
     }
@@ -197,11 +197,11 @@ function query1()
     query += "TutorHours.EndTime, Class.ClassName ";
     query += "FROM Tutor INNER JOIN Class ON Tutor.ClassID = Class.ClassID ";
     query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
-    query += "INNER JOIN Major ON Department.MajorID = Major.MajorID ";
+    query += "INNER JOIN Major ON Department.DepartmentID = Major.DepartmentID ";
     query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID ";
     query += "INNER JOIN TutorHours ON TutorHours.StudentID = Tutor.StudentID ";
     query += "WHERE Major.MajorID=\"" + param + "\" ";
-    query += "ORDER BY Tutor.StudentID,TutorHours.Weekday,TutorHours.StartTime";
+    query += "ORDER BY Student.LName, TutorHours.Weekday,TutorHours.StartTime;";
 
     execute(query);
     
@@ -216,12 +216,13 @@ function query2()
     
     var query = "";
     
-    query += "SELECT Class.ClassID, Class.Name, Count(Ebooks.ISBN) as ebook_avail ";
-    query += "FROM Major INNER JOIN Class ON Major.MajorID = Class.MajorID ";
-    query += "INNER JOIN Ebook ON Class.ClassID = Ebook.ClassID ";
-    query += "WHERE Major.MajorID=\"" + param + "\" ";
-    query += "GROUP BY Class.Name ";
-    query += "ORDER BY ebook_Avail DESC, Class.Name";
+    query += "SELECT Class.ClassID, Class.ClassName, Count(DISTINCT Ebook.ISBN) as eBooks_Available ";
+    query += "FROM Ebook INNER JOIN Class ON Class.ClassID = Ebook.ClassID ";
+    query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
+    query += "INNER JOIN Major ON Major.DepartmentID = Department.DepartmentID ";
+    query += "Where Department.DepartmentName LIKE \"%" + param + "%\" ";
+    query += "GROUP BY Class.ClassID ";
+    query += "Order By eBooks_Available DESC, Class.ClassName ";
     
     execute(query);
     
@@ -245,6 +246,7 @@ function query3()
     query += "WHERE (Class.ClassName=\"" + param + "\" ";
     query += "AND (TutorHours.WeekDay = OfficeHours.Weekday AND OfficeHours.StartTime >= TutorHours.EndTime ";
     query += "AND OfficeHours.EndTime <= TutorHours.StartTime) OR (TutorHours.Weekday != OfficeHours.WeekDay)) ";
+    query += "GROUP BY Tutor.StudentID, TutorHours.Weekday ";
     query += "ORDER BY Student.LName, TutorHours.Weekday, TutorHours.StartTime; ";
     
     execute(query);
@@ -260,7 +262,14 @@ function query4()
     
     var query = "";
     
-    execute("SELECT * FROM Major WHERE MajorID=\"" + param + "\"");
+    query += "SELECT OnlineTutorial.Title, OnlineTutorial.URL ";
+    query += "FROM OnlineTutorial INNER JOIN Class ON OnlineTutorial.ClassID = Class.ClassID ";
+    query += "Where Class.ClassID=\"" + param + "\" OR OnlineTutorial.Title=\"trees\" OR ";
+	query += "OnlineTutorial.Title LIKE \"%stack%\" OR OnlineTutorial.Title LIKE \"%binary tree%\" OR ";
+	query += "OnlineTutorial.Title LIKE \"%linked list%\" OR OnlineTutorial.Title LIKE \"%trees%\" ";
+    query += "Order By OnlineTutorial.Title, OnlineTutorial.TutorialID ";
+    
+    execute(query);
     
     removeForm();
     
