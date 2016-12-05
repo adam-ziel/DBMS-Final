@@ -81,13 +81,13 @@ function setQuery(val)
             execBtn.addEventListener("click", query2); 
             break;
         case "query3":
-            execBtn.addEventListener("click", query2);  
+            execBtn.addEventListener("click", query3);  
             break;
         case "query4":
             execBtn.addEventListener("click", query4); 
             break;
         case "query5":
-            execBtn.addEventListener("click", query4);   
+            execBtn.addEventListener("click", query5);   
             break;
         default:
             break;
@@ -115,17 +115,24 @@ function getParameter(selection)
     switch(selection)
     {
         case "query1":
-            labelForm(form, "Enter semester: ");
-            addInputElementToForm(form, "MajorID", "Spring");
+            labelForm(form, "Enter MajorID: ");
+            addInputElementToForm(form, "MajorID", "BCOS");
             break;
         case "query2":
             labelForm(form, "Enter major ID: ");
             addInputElementToForm(form, "MajorID", "BCOS");
             break;
+        case "query3":
+            labelForm(form, "Enter class ID: ");
+            addInputElementToForm(form, "MajorID", "COMP-1000");
+            break;
         case "query4":
             labelForm(form, "Enter major ID: ");
             addInputElementToForm(form, "MajorID", "BMED");
             break;
+        case "query5":
+            labelForm(form, "Enter software name: ");
+            addInputElementToForm(form, "MajorID", "Bonjour");
         default:
             break;
     }
@@ -186,17 +193,15 @@ function query1()
     
     var query = "";
     
-//    query += "SELECT Student.FName, Student.LName, Tutor.TutorID, Availability.Weekday, Availability.StartTime, "; 
-//    query += "Availability.EndTime, Class.Name ";
-//    query += "FROM Tutor INNER JOIN Class ON Tutor.ClassID = Class.ClassID ";
-//    query += "INNER JOIN Major ON Major.MajorID = Class.MajorID "
-//    query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID ";
-//    query += "WHERE Major.MajorID=\"" + param + "\" ";
-//    query += "ORDER BY Tutor.TutorID, Availability.WeekDay, Availability.StartTime";
-    
-    query += "SELECT * ";
-    query += "FROM Class ";
-    query += "WHERE Semester=\"" + param + "\""; 
+    query += "SELECT Student.FName, Student.LName, Tutor.StudentID, TutorHours.Weekday, TutorHours.StartTime, "; 
+    query += "TutorHours.EndTime, Class.ClassName ";
+    query += "FROM Tutor INNER JOIN Class ON Tutor.ClassID = Class.ClassID ";
+    query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
+    query += "INNER JOIN Major ON Department.MajorID = Major.MajorID ";
+    query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID ";
+    query += "INNER JOIN TutorHours ON TutorHours.StudentID = Tutor.StudentID ";
+    query += "WHERE Major.MajorID=\"" + param + "\" ";
+    query += "ORDER BY Tutor.StudentID,TutorHours.Weekday,TutorHours.StartTime";
 
     execute(query);
     
@@ -231,12 +236,16 @@ function query3()
     
     var query = "";
     
-    query += "SELECT Class.ClassID, Class.Name, Count(Ebooks.ISBN) as ebook_avail ";
-    query += "FROM Major INNER JOIN Class ON Major.MajorID = Class.MajorID ";
-    query += "INNER JOIN Ebook ON Class.ClassID = Ebook.ClassID ";
-    query += "WHERE Major.MajorID=\"" + param + "\" ";
-    query += "GROUP BY Class.Name ";
-    query += "ORDER BY ebook_Avail DESC, Class.Name";
+    query += "SELECT Student.FName,Student.LName, TutorHours.Weekday, TutorHours.StartTime, TutorHours.EndTime ";
+    query += "FROM Tutor JOIN Class on Tutor.ClassID = Class.ClassID ";
+    query += "Inner Join Faculty on Faculty.FacultyID = Class.FacultyID ";
+    query += "Inner Join OfficeHours on Faculty.FacultyID = OfficeHours.FacultyID ";
+    query += "Inner Join TutorHours on TutorHours.StudentID = Tutor.StudentID ";
+    query += "Inner Join Student on Student.StudentID = Tutor.StudentID ";
+    query += "WHERE (Class.ClassName=\"" + param + "\" ";
+    query += "AND (TutorHours.WeekDay = OfficeHours.Weekday AND OfficeHours.StartTime >= TutorHours.EndTime ";
+    query += "AND OfficeHours.EndTime <= TutorHours.StartTime) OR (TutorHours.Weekday != OfficeHours.WeekDay)) ";
+    query += "ORDER BY Student.LName, TutorHours.Weekday, TutorHours.StartTime; ";
     
     execute(query);
     
@@ -265,12 +274,12 @@ function query5()
     
     var query = "";
     
-    query += "SELECT Class.ClassID,Class.Name, Faculty.FName, Faculty.LName,Faculty.Rank ";
-    query += "SELECT Class.ClassID,Class.Name, Faculty.FName, Faculty.LName,Faculty.Rank ";
-    query += "FROM Faculty INNER JOIN Class ON Faculty.facultyID = Class.facultyID ";
+    query += "SELECT Class.ClassID, Class.ClassName, Faculty.FName AS Professor_FirstName, ";
+    query += "Faculty.LName AS Professor_LastName, Faculty.Rating AS RateMyProfessor_Rating ";
+    query += "FROM Faculty INNER JOIN Class ON Faculty.facultyID = Class.FacultyID ";
     query += "INNER JOIN Software ON Software.ClassID = Class.ClassID ";
-    query += "WHERE Faulty.Rank >= 3 AND Software.Name=\"" + param +"\" ";
-    query += "ORDER BY Faulty.Rank DESC, Class.Name"
+    query += "WHERE Faculty.Rating >= 3 AND Software.Name=\"" + param +"\" ";
+    query += "ORDER BY Faculty.Rating DESC, Class.ClassName";
     
     execute(query);
     

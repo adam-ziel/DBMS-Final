@@ -13,10 +13,11 @@
         <label for='selectQuery'><strong>What would you like to today?</strong></label><br>
         <select onChange="setQuery()" id="selectQuery" disabled>
             <option value="">--</option>
-            <option id="query1">Select all courses for a given semester</option>
+            <option id="query1">Find all tutors available for your major</option>
             <option id="query2">List all courses in your major in terms of free eBook availabilty</option>
-            <option id="query3" value="SELECT MajorID FROM Major">Show all Major IDs</option>
+            <option id="query3">Find all tutor times that don't conflict with a course's office hours</option>
             <option id="query4">Show name for specific MajorID</option>
+            <option id="query5">Find all classes that use a specific software</option>
         </select><br>
         
         <div id="param"></div>
