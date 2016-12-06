@@ -45,5 +45,3 @@ INSERT INTO Ebook VALUES (9780133770018, "https://www.amazon.com/Introduction-MA
 INSERT INTO Ebook VALUES (9780073534879, "https://www.amazon.com/Introduction-MATLAB-Engineers-William-Palm/dp/0073534870/ref=sr_1_2?s=books&ie=UTF8&qid=1480998200&sr=1-2&keywords=Introduction+to+matlab", "Introduction to MATLAB for Engineers", "ENGR-1800");
 INSERT INTO Ebook VALUES (9780124058767, "https://www.amazon.com/Matlab-Practical-Introduction-Programming-Problem/dp/0124058760/ref=sr_1_3?s=books&ie=UTF8&qid=1480998200&sr=1-3&keywords=Introduction+to+matlab", "Matlab: A Practical Introduction to Programming and Problem Solving", "ENGR-1800");
 INSERT INTO Ebook VALUES (9780124202283, "https://www.amazon.com/Introduction-MATLAB-Programming-Numerical-Engineers/dp/0124202284/ref=sr_1_4?s=books&ie=UTF8&qid=1480998200&sr=1-4&keywords=Introduction+to+matlab", "An Introduction to MATLAB Programming and Numerical Methods for Engineers", "ENGR-1800");
-
-                          
