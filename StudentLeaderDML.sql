@@ -1,3 +1,16 @@
 INSERT INTO StudentLeader VALUES (3, 1);
-
-
+INSERT INTO StudentLeader VALUES (3, 2);
+INSERT INTO StudentLeader VALUES (2, 1);
+INSERT INTO StudentLeader VALUES (2, 2);
+INSERT INTO StudentLeader VALUES (5, 1);
+INSERT INTO StudentLeader VALUES (5, 2);
+INSERT INTO StudentLeader VALUES (8, 1);
+INSERT INTO StudentLeader VALUES (8, 2);
+INSERT INTO StudentLeader VALUES (9, 1);
+INSERT INTO StudentLeader VALUES (9, 2);
+INSERT INTO StudentLeader VALUES (12, 1);
+INSERT INTO StudentLeader VALUES (12, 2);
+INSERT INTO StudentLeader VALUES (17, 1);
+INSERT INTO StudentLeader VALUES (17, 2);
+INSERT INTO StudentLeader VALUES (18, 1);
+INSERT INTO StudentLeader VALUES (18, 2);
