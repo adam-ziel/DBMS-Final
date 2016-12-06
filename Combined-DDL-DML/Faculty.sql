@@ -22,15 +22,17 @@ INSERT INTO Faculty VALUES (NULL, "Mira", "Yun", 2, "Dobbs", 133, 3.5);
 
 INSERT INTO Faculty VALUES (NULL, "Francis", "Hopcroft", 3, "Annex Central", 308, 3.3);
 INSERT INTO Faculty VALUES (NULL, "Vitaliy", "Saykin", 3, "Annex South", 101, 2.7);
-INSERT INTO Faculty VALUES (NULL,"Leonard","Anderson",3,"Annex South",101,1.6);
-INSERT INTO Faculty VALUES (NULL,"Tugba","Arsava",3,"Annex Central",304,NULL);
-INSERT INTO Faculty VALUES (NULL,"Abigail","Charest",3,NULL,NULL,2.1);
-INSERT INTO Faculty VALUES (NULL,"Gautham","Das",3,"Annex Central",312,4.0);
-INSERT INTO Faculty VALUES (NULL,"Michael","Davidson",3,"Annex South",101,4.3);
-INSERT INTO Faculty VALUES (NULL,"Jerry","Hopcroft",3,"Annex South",101,NULL);
-INSERT INTO Faculty VALUES (NULL,"Anuja","Kama",3,"Annex Central",304,1.5);
-INSERT INTO Faculty VALUES (NULL,"Jim","Lambrechts",3,"Annex South",101,NULL);
-INSERT INTO Faculty VALUES (NULL,"Henderson","Pritchard",3,"Annex Central",309,3.4);
+INSERT INTO Faculty VALUES (NULL, "Leonard", "Anderson", 3,"Annex South", 101, 1.6);
+INSERT INTO Faculty VALUES (NULL, "Tugba", "Arsava", 3,"Annex Central", 304, NULL);
+INSERT INTO Faculty VALUES (NULL, "Abigail", "Charest", 3, NULL, NULL, 2.1);
+INSERT INTO Faculty VALUES (NULL, "Gautham", "Das", 3, "Annex Central", 312, 4.0);
+INSERT INTO Faculty VALUES (NULL, "Michael", "Davidson", 3, "Annex South", 101, 4.3);
+INSERT INTO Faculty VALUES (NULL, "Jerry", "Hopcroft", 3, "Annex South", 101, NULL);
+INSERT INTO Faculty VALUES (NULL, "Anuja", "Kama", 3, "Annex Central", 304, 1.5);
+INSERT INTO Faculty VALUES (NULL, "Jim", "Lambrechts", 3, "Annex South", 101, NULL);
+INSERT INTO Faculty VALUES (NULL, "Henderson", "Pritchard", 3, "Annex Central", 309, 3.4);
+INSERT INTO Faculty VALUES (NULL, "Alborz", "Nakisa", 3, NULL, NULL, 4.0);
+INSERT INTO Faculty VALUES (NULL, "Ostertog", "Heather", 3, NULL, NULL, NULL);
 
 INSERT INTO Faculty VALUES (NULL, "Joseph", "Martel-Foley", 4, "Ira Allen", 310, 3.9);
 INSERT INTO Faculty VALUES (NULL, "Ali", "Moazed", 4, "Kingman", 206, 3.5);
@@ -48,4 +50,3 @@ INSERT INTO Faculty VALUES (NULL, "Scott", "Grenquist", 5, "Dobbs", 207, 4.6);
 INSERT INTO Faculty VALUES (NULL, "Rabeeh", "Majidi", 5, "Dobbs", 220, 3.8);
 INSERT INTO Faculty VALUES (NULL, "James", "McCusker", 5, "Dobbs", 209, 4.3);
 INSERT INTO Faculty VALUES (NULL, "Joseph", "Santacroce", 5, "Dobbs", 218, 4.0);
-
