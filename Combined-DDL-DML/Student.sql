@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 CREATE TABLE `Student` (
+=======
+CREATE TABLE "Student" (
+>>>>>>> origin/master
 	`StudentID`	INTEGER,
 	`FName`	TEXT,
 	`LName`	TEXT,
 	`MajorID`	TEXT,
 	PRIMARY KEY(`StudentID`),
+<<<<<<< HEAD
 	FOREIGN KEY(`MajorID`) REFERENCES `Major`(`MajorID`)
+=======
+	FOREIGN KEY(`MajorID`) REFERENCES Major(MajorID)
+>>>>>>> origin/master
 );
 
 INSERT INTO Student VALUES (1, "George", "Lucas", "BSCE");

@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 CREATE TABLE `Tutor` (
 	`StudentID`	INTEGER,
 	`ClassID`	TEXT,
+=======
+CREATE TABLE "Tutor" (
+	`StudentID`	INTEGER,
+	`ClassID`	TEXT,
+	PRIMARY KEY(`StudentID`),
+>>>>>>> origin/master
 	FOREIGN KEY(`StudentID`) REFERENCES `Student`(`StudentID`),
 	FOREIGN KEY(`ClassID`) REFERENCES `Class`(`ClassID`)
 );
