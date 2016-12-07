@@ -11,7 +11,7 @@ CREATE TABLE `TutorHours` (
 
 INSERT INTO TutorHours VALUES (5, "Tuesday", 2, 1430, 1530, "2:30 PM", "3:30 PM");
 INSERT INTO TutorHours VALUES (5, "Friday", 5, 1000, 1100, "10:00 AM", "11:00 AM");
-INSERT INTO TutorHours VALUES (5, "Monday", 1, 1330, 1530, "1:30 AM", "3:30 PM");
+INSERT INTO TutorHours VALUES (5, "Monday", 1, 1330, 1530, "1:30 PM", "3:30 PM");
 INSERT INTO TutorHours VALUES (5, "Tuesday", 2, 1400, 1500, "2:00 PM", "3:00 PM");
 INSERT INTO TutorHours VALUES (5, "Friday", 5, 1000, 1200, "10:00 AM", "12:00 PM");
 INSERT INTO TutorHours VALUES (6, "Thursday", 4, 0930, 1000, "9:30 AM", "10:00 AM");

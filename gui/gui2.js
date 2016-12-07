@@ -7,7 +7,6 @@ var execBtn = document.getElementById('execute');
 
 execBtn.addEventListener("click", execute); 
 
-//var query = "SELECT * FROM Faculty";
 var db = new sql.Database();
 
 window.onload = function()
@@ -21,10 +20,8 @@ window.onload = function()
  * Executes query based upon user dropdown selection 
  */
 function setQuery(val) 
-{  
-    //clearErrors(); 
-    
-    outputElm.innerHTML = ""; // clear output
+{   
+    outputElm.innerHTML = "Results will be displayed here"; // clear output
     
     var dropdown = document.getElementById("selectQuery"); // get handle to query dropdown
     
@@ -64,6 +61,9 @@ function setQuery(val)
 }
 
 
+/*
+ * creates HTML select element
+ */
 function createDropdown(parentElement, parentElementLabel, label, id, behavior)
 {
     var dropdown = document.createElement("select");
@@ -77,6 +77,10 @@ function createDropdown(parentElement, parentElementLabel, label, id, behavior)
     parentElement.appendChild(dropdown);
 }
 
+
+/*
+ * creates HTML label element
+ */ 
 function labelDropdown(divLabel, text)
 {
     divLabel.appendChild(document.createElement("br")); // create new line
@@ -88,6 +92,10 @@ function labelDropdown(divLabel, text)
     divLabel.appendChild(dropdownLabel); // append it to the div
 }
 
+
+/* 
+ * populates dropdown with all available courses
+ */
 function populateCourseDropdown(dropdown1)
 {
     addOption(dropdown1, "--");
@@ -99,6 +107,10 @@ function populateCourseDropdown(dropdown1)
     addOption(dropdown1, "MECH-1000");
 }
 
+
+/*
+ * populates dropdown with all available resources
+ */
 function populateResourceDropdown(dropdown2)
 {
     addOption(dropdown2, "--");
@@ -108,6 +120,10 @@ function populateResourceDropdown(dropdown2)
     addOption(dropdown2, "Tutors");
 }
 
+
+/*
+ * populates dropdown with all available resources
+ */
 function addOption(dropdown, text)
 {
     var option = document.createElement("option");
@@ -117,12 +133,20 @@ function addOption(dropdown, text)
     dropdown.appendChild(option);
 }
 
+
+/*
+ * creates and populates resource dropdown
+ */
 function selectResource()
 {
     createDropdown(resourceDropdown, resourceDropdownLabel, "<strong>Select resource: </strong>", "dropdown2", courseQuery); 
     populateResourceDropdown(dropdown2);
 }
 
+
+/*
+ * calls appropriate query based on course and resource
+ */
 function courseQuery()
 {
     var dropdown = document.getElementById("dropdown1");
@@ -153,15 +177,43 @@ function courseQuery()
     }
 }
 
+
+/*
+ * gets all useful attributes from Ebooks
+ */
 function getEbooks(course)
 {
-//    query = "SELECT Name, URL, ISBN, ClassID FROM Ebook WHERE Ebook.ClassID=\"" + course +"\" ";
-//    query += "ORDER BY Name";
-    var query = "SELECT LName FROM Faculty"
+    var query = "SELECT Name, URL, ISBN, ClassID FROM Ebook WHERE Ebook.ClassID=\"" + course +"\" ";
+    query += "ORDER BY Name";
+
     execute(query);
 }
 
+/*
+ * gets all useful attributes relating to tutors
+ */
+function getTutors(course)
+{
+    var query = "SELECT Student.FName, Student.LName, TutorHours.Weekday, TutorHours.StartTime_Str, TutorHours.EndTime_Str ";
+    query += "FROM Student INNER JOIN Tutor ON Student.StudentID=Tutor.StudentID ";
+    query += "INNER JOIN TutorHours ON Tutor.StudentID=Tutor.StudentID ";
+    query += "WHERE Tutor.ClassID=\"" + course +"\" ";
+    query += "GROUP BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime_Str, TutorHours.EndTime_Str ";
+    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime_Str, TutorHours.EndTime_Str";
+    
+    execute(query);
+}
 
+/*
+ * gets all useful attributes from OnlineTutorials
+ */
+function getOnlineTutorials(course)
+{
+    var query = "SELECT Title, ParentSite AS Host, URL FROM OnlineTutorial "; 
+    query += "WHERE OnlineTutorial.ClassID=\"" + course +"\" ORDER BY Title";
+    
+    execute(query);
+}
 
 
 /* 
@@ -172,7 +224,7 @@ function getEbooks(course)
 function loadDB()
 {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', './../test.txt', true);
+    xhr.open('GET', './../Academic-Resources.txt', true);
 
     xhr.onload = function(e) 
     {    
@@ -202,6 +254,9 @@ function printResult(res)
     
     for (var i = 0; i < res.length; i++) 
         outputElm.appendChild(tableCreate(res[i].columns, res[i].values));
+    
+    if (outputElm.textContent == "") 
+        outputElm.textContent = "No resources match your search";
 }
 
 

@@ -43,10 +43,8 @@ function clearErrors()
 //dbFileElm.onchange = function()
 window.onload = function()
 {
-    //var f = dbFileElm.files[0];
+    var f = dbFileElm.files[0];
     
-    var f = new File("./../../Academic-Resources.db");
-    alert("Hi");
 	var r = new FileReader();
     
 	r.onload = function() 
