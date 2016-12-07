@@ -242,7 +242,7 @@ INSERT INTO Tutor VALUES (15, "ENGL-0700");
 
 CREATE TABLE "Software" (
 	`SoftwareID`	INTEGER,
-	`URL`	TEXT UNIQUE,
+	`URL`	TEXT,
 	`Name`	TEXT,
 	`ClassID`	TEXT,
 	PRIMARY KEY(`SoftwareID`),

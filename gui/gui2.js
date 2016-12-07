@@ -243,9 +243,9 @@ function getOnlineTutorials(course)
     execute(query);
 }
 
-function getSoftware()
+function getSoftware(course)
 {
-    var query = "SELECT * FROM Software WHERE Software.ClassID=\"" + course +"\"";
+    var query = "SELECT Name, URL FROM Software WHERE Software.ClassID=\"" + course +"\"";
     
     execute(query);
 }
