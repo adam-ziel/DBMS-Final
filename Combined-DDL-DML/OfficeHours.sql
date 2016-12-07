@@ -1,20 +1,21 @@
-CREATE TABLE "OfficeHours" (
+CREATE TABLE `OfficeHours` (
 	`FacultyID`	INTEGER,
 	`Weekday`	TEXT,
+	`WeekdayID`	INTEGER,
 	`StartTime`	INTEGER,
 	`EndTime`	INTEGER,
-	PRIMARY KEY(`FacultyID`),
+	`StartTime_Str`	TEXT,
+	`EndTime_Str` 	TEXT,
 	FOREIGN KEY(`FacultyID`) REFERENCES Faculty(FacultyID)
 );
 
-INSERT INTO OfficeHours VALUES (7, "Monday", 1100, 1200);
-INSERT INTO OfficeHours VALUES (7, "Wednesday", 1100, 1200);
-INSERT INTO OfficeHours VALUES (7, "Friday", 1100, 1200);
-INSERT INTO OfficeHours VALUES (2, "Tuesday", 800, 950);
-INSERT INTO OfficeHours VALUES (2, "Thursday", 800, 950);
-INSERT INTO OfficeHours VALUES (2, "Tuesday", 1300, 1450);
-INSERT INTO OfficeHours VALUES (2, "Thursday", 1300, 1450);
-INSERT INTO OfficeHours VALUES (3, NULL, NULL, NULL);
-INSERT INTO OfficeHours VALUES (4, "Wednesday", 1100, 1200);
-INSERT INTO OfficeHours VALUES (4, "Friday", 900, 1100);
-INSERT INTO OfficeHours VALUES (5, "Monday", 900, 1100);
+INSERT INTO OfficeHours VALUES (2, "Tuesday", 2, 800, 950, "8:00 AM", "9:50 AM");
+INSERT INTO OfficeHours VALUES (2, "Thursday", 4, 800, 950, "8:00 AM", "9:50 AM");
+INSERT INTO OfficeHours VALUES (2, "Tuesday", 2, 1300, 1450, "1:00 PM", "2:50 PM");
+INSERT INTO OfficeHours VALUES (2, "Thursday", 4, 1300, 1450, "1:00 PM", "2:50 PM");
+INSERT INTO OfficeHours VALUES (4, "Wednesday", 3, 1100, 1200, "11:00 AM", "12:00 PM");
+INSERT INTO OfficeHours VALUES (4, "Friday", 5, 900, 1100, "9:00 AM", "11:00 AM");
+INSERT INTO OfficeHours VALUES (5, "Monday", 1, 900, 1100, "9:00 AM", "11:00 AM");
+INSERT INTO OfficeHours VALUES (7, "Monday", 1, 1100, 1200, "11:00 AM", "12:00 PM");
+INSERT INTO OfficeHours VALUES (7, "Wednesday", 3, 1100, 1200, "11:00 AM", "12:00 AM");
+INSERT INTO OfficeHours VALUES (7, "Friday", 5, 1100, 1200), "11:00 AM", "12:00 PM";
