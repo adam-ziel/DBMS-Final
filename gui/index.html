@@ -17,8 +17,9 @@
             <option id="COMP-2000">COMP-2000 Data Structures</option>
         </select>
 -->
-        
-        <label for='selectQuery'><strong>What would you like to today?</strong></label><br>
+        <div align="center">
+
+        <label for='selectQuery'><strong>What would you like to today?</strong></label><br><br>
         <select onChange="setQuery()" id="selectQuery" disabled>
             <option>--</option>
             <option id="browse">Browse resources by course</option>
@@ -28,6 +29,7 @@
             <option id="query4">Find all online tutorials related to a particular course</option>
             <option id="query5">Find all classes that use a specific software taught by professors with RateMyProfessor ratings above 3.0</option>
         </select><br>
+            
         
         <div id='courseDropdownLabel'></div>
         <div id='courseDropdown'></div>
@@ -37,14 +39,17 @@
         
         <div id="param"></div>
 
-        <button id="execute" class="button" disabled>Execute</button>
+<!--        <button id="execute" class="button" disabled>Execute</button>-->
+        <br>
+        <button id="execute" class="button">Execute</button>
         
-        <label class="button">Load an SQLite database file: <input type='file' id='dbfile' ></label>
+<!--        <label class="button">Load an SQLite database file: <input type='file' id='dbfile' ></label>-->
 
         <div id="error" class="error"></div>
         
         <pre id="output">Results will be displayed here</pre>
-    
+            
+        </div>
     </main>
 
     <footer>
@@ -54,6 +59,6 @@
     </footer>
     
     <script src="sql.js"></script>
-    <script type="text/javascript" src="gui.js"></script>
+    <script type="text/javascript" src="gui2.js"></script>
 </body>
 </html>

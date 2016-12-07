@@ -40,10 +40,13 @@ function clearErrors()
 /* 
  *Load a db from a file 
  */
-dbFileElm.onchange = function() 
+//dbFileElm.onchange = function()
+window.onload = function()
 {
-    var f = dbFileElm.files[0];
+    //var f = dbFileElm.files[0];
     
+    var f = new File("./../../Academic-Resources.db");
+    alert("Hi");
 	var r = new FileReader();
     
 	r.onload = function() 
@@ -82,7 +85,7 @@ function setQuery(val)
     switch(selection)
     {
         case "browse":
-            createDropdown(courseDropdown, courseDropdownLabel, "<strong>Select course: </strong>", "dropdown1", displayAll);
+            createDropdown(courseDropdown, courseDropdownLabel, "<strong>Select course: </strong>", "dropdown1", selectResource);
             populateCourseDropdown(dropdown1);
             break;
         case "query1":
@@ -197,7 +200,7 @@ function addFormToHTML(form)
 }
 
 
-function createDropdown(divDropdown, divLabel, label, id, behavior)
+function createDropdown(parentElement, parentElementLabel, label, id, behavior)
 {
     var dropdown = document.createElement("select");
     
@@ -205,17 +208,9 @@ function createDropdown(divDropdown, divLabel, label, id, behavior)
     
     dropdown.onchange = behavior;
     
+    labelDropdown(parentElementLabel, label);
     
-    labelDropdown(divLabel, label);
-    
-    
-    
-    
-    
-    divDropdown.appendChild(dropdown);
-    
-    
-    //dropdown.addEventListener("change", alert("HiYt"));
+    parentElement.appendChild(dropdown);
 }
 
 function labelDropdown(divLabel, text)
@@ -231,6 +226,7 @@ function labelDropdown(divLabel, text)
 
 function populateCourseDropdown(dropdown1)
 {
+    addOption(dropdown1, "--");
     addOption(dropdown1, "COMP-1000");
     addOption(dropdown1, "COMP-1100");
     addOption(dropdown1, "COMP-2000");
@@ -241,10 +237,11 @@ function populateCourseDropdown(dropdown1)
 
 function populateResourceDropdown(dropdown2)
 {
-    addOption(dropdown2, "Tutor");
-    addOption(dropdown2, "Ebook");
-    addOption(dropdown2, "OnlineTutorial");
-    addOption(dropdown2, "FSG");
+    addOption(dropdown2, "--");
+    addOption(dropdown2, "eBooks");
+    addOption(dropdown2, "Facillitated Study Groups");
+    addOption(dropdown2, "Online Tutorials");
+    addOption(dropdown2, "Tutors");
 }
 
 function addOption(dropdown, text)
@@ -256,7 +253,7 @@ function addOption(dropdown, text)
     dropdown.appendChild(option);
 }
 
-function displayAll()
+function selectResource()
 {
     createDropdown(resourceDropdown, resourceDropdownLabel, "<strong>Select resource: </strong>", "dropdown2", courseQuery); 
     populateResourceDropdown(dropdown2);
@@ -268,13 +265,54 @@ function courseQuery()
     
     var course = dropdown.options[dropdown.selectedIndex].text;
     
+    
     dropdown = document.getElementById("dropdown2");
     
     var resource = dropdown.options[dropdown.selectedIndex].text;
     
-    var query = "SELECT * FROM " + resource + " WHERE Ebook.ClassID=\"" + course +"\"";
+    switch(resource)
+    {
+        case "eBooks":
+            getEbooks(course);
+            break;
+        case "Tutors":
+            getTutors(course);
+            break;
+        case "Online Tutorials":
+            getOnlineTutorials(course);
+            break;
+        case "Facillitated Study Groups":
+            getFacillitatedStudyGroups(course);
+            break
+        default: 
+            break;
+    }
+}
+
+function getEbooks(course)
+{
+    var query = "SELECT Name, URL, ISBN, ClassID FROM Ebook WHERE Ebook.ClassID=\"" + course +"\" ";
+    query += "ORDER BY Name";
     
-    alert(query);
+    execute(query);
+}
+
+function getTutors(course)
+{
+    var query = "SELECT Student.FName, Student.LName, TutorHours.Weekday, TutorHours.StartTime_Str, TutorHours.EndTime_Str ";
+    query += "FROM Student INNER JOIN Tutor ON Student.StudentID=Tutor.StudentID ";
+    query += "INNER JOIN TutorHours ON Tutor.StudentID=Tutor.StudentID ";
+    query += "WHERE Tutor.ClassID=\"" + course +"\" ";
+    query += "GROUP BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime_Str, TutorHours.EndTime_Str ";
+    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime_Str, TutorHours.EndTime_Str";
+    
+    execute(query);
+}
+
+function getOnlineTutorials(course)
+{
+    var query = "SELECT Title, ParentSite AS Host, URL FROM OnlineTutorial "; 
+    query += "WHERE OnlineTutorial.ClassID=\"" + course +"\" ORDER BY Title";
     
     execute(query);
 }
