@@ -1,3 +1,12 @@
+CREATE TABLE "Software" (
+	`SoftwareID`	INTEGER,
+	`URL`	TEXT UNIQUE,
+	`Name`	TEXT,
+	`ClassID`	TEXT,
+	PRIMARY KEY(`SoftwareID`),
+	FOREIGN KEY(`ClassID`) REFERENCES Class(ClassID)
+);
+
 INSERT INTO Software VALUES (1, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-1000");
 INSERT INTO Software VALUES (2, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-1100");
 INSERT INTO Software VALUES (3, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-2500");
