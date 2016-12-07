@@ -1,35 +1,26 @@
-<<<<<<< HEAD
 CREATE TABLE `Student` (
-=======
-CREATE TABLE "Student" (
->>>>>>> origin/master
-	`StudentID`	INTEGER,
+	`StudentID`	INTEGER PRIMARY KEY,
 	`FName`	TEXT,
 	`LName`	TEXT,
 	`MajorID`	TEXT,
-	PRIMARY KEY(`StudentID`),
-<<<<<<< HEAD
 	FOREIGN KEY(`MajorID`) REFERENCES `Major`(`MajorID`)
-=======
-	FOREIGN KEY(`MajorID`) REFERENCES Major(MajorID)
->>>>>>> origin/master
 );
 
-INSERT INTO Student VALUES (1, "George", "Lucas", "BSCE");
-INSERT INTO Student VALUES (2, "Bobby", "Laughlin", "BCOS");
-INSERT INTO Student VALUES (3, "Julie", "Medeiros", "BSCN");
-INSERT INTO Student VALUES (4, "David", "Lee", "BSME");
-INSERT INTO Student VALUES (5, "Anthony", "A", "BCOS");
-INSERT INTO Student VALUES (6, "Bachar", "Al Hardy", "BELM");
-INSERT INTO Student VALUES (7, "Gregory", "Butterworth", "BSEE");
-INSERT INTO Student VALUES (8, "Daniel", "Calderon", "BCOS");
-INSERT INTO Student VALUES (9, "Stephen", "Campion", "BCOS");
-INSERT INTO Student VALUES (10, "Nick", "Chase", "BSME");
-INSERT INTO Student VALUES (11, "Shubh", "Chokshi", "BSEE");
-INSERT INTO Student VALUES (12, "Bethy", "Diakabana", "BCOS");
-INSERT INTO Student VALUES (13, "Bret", "Glendye", "BSME");
-INSERT INTO Student VALUES (14, "Lyn", "Carswell", "BSEE");
-INSERT INTO Student VALUES (15, "Jojo", "J", "BSEE");
-INSERT INTO Student VALUES (16, "Abbey", "Jean", "BSAM");
-INSERT INTO Student VALUES (17, "Luis Jose", "Bechara Romero", "BCOS");
-INSERT INTO Student VALUES (18, "Jacob", "Jones", "BCOS");
+INSERT INTO Student VALUES (NULL, "George", "Lucas", "BSCE");
+INSERT INTO Student VALUES (NULL, "Bobby", "Laughlin", "BCOS");
+INSERT INTO Student VALUES (NULL, "Julie", "Medeiros", "BSCN");
+INSERT INTO Student VALUES (NULL, "David", "Lee", "BSME");
+INSERT INTO Student VALUES (NULL, "Anthony", "A", "BCOS");
+INSERT INTO Student VALUES (NULL, "Bachar", "Al Hardy", "BELM");
+INSERT INTO Student VALUES (NULL, "Gregory", "Butterworth", "BSEE");
+INSERT INTO Student VALUES (NULL, "Daniel", "Calderon", "BCOS");
+INSERT INTO Student VALUES (NULL, "Stephen", "Campion", "BCOS");
+INSERT INTO Student VALUES (NULL, "Nick", "Chase", "BSME");
+INSERT INTO Student VALUES (NULL, "Shubh", "Chokshi", "BSEE");
+INSERT INTO Student VALUES (NULL, "Bethy", "Diakabana", "BCOS");
+INSERT INTO Student VALUES (NULL, "Bret", "Glendye", "BSME");
+INSERT INTO Student VALUES (NULL, "Lyn", "Carswell", "BSEE");
+INSERT INTO Student VALUES (NULL, "Jojo", "J", "BSEE");
+INSERT INTO Student VALUES (NULL, "Abbey", "Jean", "BSAM");
+INSERT INTO Student VALUES (NULL, "Luis Jose", "Bechara Romero", "BCOS");
+INSERT INTO Student VALUES (NULL, "Jacob", "Jones", "BCOS");
