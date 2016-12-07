@@ -1,6 +1,6 @@
 CREATE TABLE "Software" (
 	`SoftwareID`	INTEGER,
-	`URL`	TEXT UNIQUE,
+	`URL`	TEXT,
 	`Name`	TEXT,
 	`ClassID`	TEXT,
 	PRIMARY KEY(`SoftwareID`),
