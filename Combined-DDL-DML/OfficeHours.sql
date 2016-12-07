@@ -2,7 +2,7 @@ CREATE TABLE "OfficeHours" (
 	`FacultyID`	INTEGER,
 	`Weekday`	TEXT,
 	`StartTime`	INTEGER,
-	`Field4`	INTEGER,
+	`EndTime`	INTEGER,
 	PRIMARY KEY(`FacultyID`),
 	FOREIGN KEY(`FacultyID`) REFERENCES Faculty(FacultyID)
 );
