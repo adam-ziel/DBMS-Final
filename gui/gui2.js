@@ -4,11 +4,14 @@ var outputElm = document.getElementById('output');
 var errorElm = document.getElementById('error');
 var dbFileElm = document.getElementById('dbfile');
 var execBtn = document.getElementById('execute');
-
-execBtn.addEventListener("click", execute); 
+var queryDropdown = document.getElementById("selectQuery"); // get handle to query dropdown
 
 var db = new sql.Database();
 
+
+/* 
+ * loads db on page load, and allows user to select a query
+ */ 
 window.onload = function()
 {
     loadDB();
@@ -17,43 +20,39 @@ window.onload = function()
 
 
 /* 
- * Executes query based upon user dropdown selection 
+ * Executes query based upon queryDropdown value
  */
-function setQuery(val) 
+function setQuery() 
 {   
+    removeAllDynamicElements();
     outputElm.innerHTML = "Results will be displayed here"; // clear output
     
-    var dropdown = document.getElementById("selectQuery"); // get handle to query dropdown
+    var selectedQuery = queryDropdown.options[queryDropdown.selectedIndex].id;   
     
-    var selection = dropdown.options[dropdown.selectedIndex].id; // get handle to 
-    
-    //removePreviousFormIfExists();  
-    
-    switch(selection)
+    switch(selectedQuery)
     {
         case "browse":
-            createDropdown(courseDropdown, courseDropdownLabel, "<strong>Select course: </strong>", "dropdown1", selectResource);
-            populateCourseDropdown(dropdown1);
+            selectCoursePrompt();
             break;
         case "query1":
             execBtn.addEventListener("click", query1); 
-            getParameter(selection);
+            getParameter(selectedQuery);
             break;
         case "query2":
             execBtn.addEventListener("click", query2); 
-            getParameter(selection);
+            getParameter(selectedQuery);
             break;
         case "query3":
             execBtn.addEventListener("click", query3);  
-            getParameter(selection);
+            getParameter(selectedQuery);
             break;
         case "query4":
             execBtn.addEventListener("click", query4); 
-            getParameter(selection);
+            getParameter(selectedQuery);
             break;
         case "query5":
             execBtn.addEventListener("click", query5);  
-            getParameter(selection);
+            getParameter(selectedQuery);
             break;
         default:
             break;
@@ -62,34 +61,63 @@ function setQuery(val)
 
 
 /*
- * creates HTML select element
+ * removes element specified by its DOM id, if it exists
  */
-function createDropdown(parentElement, parentElementLabel, label, id, behavior)
+function removeElement(id)
 {
-    var dropdown = document.createElement("select");
+    var element = document.getElementById(id);
     
-    dropdown.id = id;
-    
-    dropdown.onchange = behavior;
-    
-    labelDropdown(parentElementLabel, label);
-    
-    parentElement.appendChild(dropdown);
+    if (typeof(element) != 'undefined' && element != null)
+        element.remove();
+}
+
+
+/* 
+ * removes all query-specific elements we created on previous query
+ */ 
+function removeAllDynamicElements()
+{
+    removeElement("form1");
+    removeElement("dropdown1");
+    removeElement("dropdown2");
 }
 
 
 /*
- * creates HTML label element
- */ 
-function labelDropdown(divLabel, text)
+ * creates and populates course dropdown
+ */
+function selectCoursePrompt()
 {
-    divLabel.appendChild(document.createElement("br")); // create new line
-    
-    var dropdownLabel = document.createElement("label"); // create label element
-    
-    dropdownLabel.innerHTML = text; // set its inner HTML
+    createDropdown(courseDropdown, "Select a course:  ", "dropdown1", selectResourcePrompt);
+    populateCourseDropdown(dropdown1);
+}
 
-    divLabel.appendChild(dropdownLabel); // append it to the div
+
+/*
+ * creates and populates resource dropdown
+ */
+function selectResourcePrompt()
+{
+    createDropdown(resourceDropdown, "Select a resource:  ", "dropdown2", courseQuery); 
+    populateResourceDropdown(dropdown2);
+}
+
+
+/*
+ * creates HTML select element
+ */
+function createDropdown(parentDiv, text, dropdownId, behavior)
+{
+    parentDiv.appendChild(document.createElement("br"));
+    
+    label = document.createElement("strong");
+    label.textContent = text;
+    parentDiv.appendChild(label);
+    
+    var dropdown = document.createElement("select");
+    dropdown.id = dropdownId;
+    dropdown.onchange = behavior;
+    parentDiv.appendChild(dropdown);
 }
 
 
@@ -114,9 +142,12 @@ function populateCourseDropdown(dropdown1)
 function populateResourceDropdown(dropdown2)
 {
     addOption(dropdown2, "--");
+    addOption(dropdown2, "Course Reserve Textbooks");
     addOption(dropdown2, "eBooks");
     addOption(dropdown2, "Facillitated Study Groups");
+    addOption(dropdown2, "Office Hours");
     addOption(dropdown2, "Online Tutorials");
+    addOption(dropdown2, "Software");
     addOption(dropdown2, "Tutors");
 }
 
@@ -127,20 +158,8 @@ function populateResourceDropdown(dropdown2)
 function addOption(dropdown, text)
 {
     var option = document.createElement("option");
-    
-    option.innerHTML = text;
-    
+    option.textContent = text;
     dropdown.appendChild(option);
-}
-
-
-/*
- * creates and populates resource dropdown
- */
-function selectResource()
-{
-    createDropdown(resourceDropdown, resourceDropdownLabel, "<strong>Select resource: </strong>", "dropdown2", courseQuery); 
-    populateResourceDropdown(dropdown2);
 }
 
 
@@ -150,12 +169,11 @@ function selectResource()
 function courseQuery()
 {
     var dropdown = document.getElementById("dropdown1");
+    dropdown.onchange=courseQuery; // allows user to check multiple courses for each element
     
     var course = dropdown.options[dropdown.selectedIndex].text;
     
-    
     dropdown = document.getElementById("dropdown2");
-    
     var resource = dropdown.options[dropdown.selectedIndex].text;
     
     switch(resource)
@@ -163,14 +181,23 @@ function courseQuery()
         case "eBooks":
             getEbooks(course);
             break;
+        case "Facillitated Study Groups":
+            getFacillitatedStudyGroups(course);
+            break;
         case "Tutors":
             getTutors(course);
+            break;
+        case "Office Hours":
+            getOfficeHours(course);
             break;
         case "Online Tutorials":
             getOnlineTutorials(course);
             break;
-        case "Facillitated Study Groups":
-            getFacillitatedStudyGroups(course);
+        case "Software":
+            getSoftware(course);
+            break;
+        case "Course Reserve Tectbooks":
+            getCourseReserves(course);
             break
         default: 
             break;
@@ -178,9 +205,14 @@ function courseQuery()
 }
 
 
-/*
- * gets all useful attributes from Ebooks
- */
+/********************************* Basic queries **********************************/
+
+function getCourseReserves(course)
+{
+    var query = "SELECT * FROM Textbook WHERE Textbook.ClassID=\"" + course +"\" ";
+    
+    execute(query);
+}
 function getEbooks(course)
 {
     var query = "SELECT Name, URL, ISBN, ClassID FROM Ebook WHERE Ebook.ClassID=\"" + course +"\" ";
@@ -189,9 +221,35 @@ function getEbooks(course)
     execute(query);
 }
 
-/*
- * gets all useful attributes relating to tutors
- */
+function getFacillitatedStudyGroups(course)
+{
+    var query = "SELECT * FROM FSG WHERE FSG.ClassID=\"" + course +"\" ";
+
+    execute(query);
+}
+
+function getOfficeHours(course)
+{
+    var query = "SELECT * FROM OfficeHours WHERE OfficeHours.ClassID=\"" + course +"\" ";
+    
+    execute(query);
+}
+
+function getOnlineTutorials(course)
+{
+    var query = "SELECT Title, ParentSite AS Host, URL FROM OnlineTutorial "; 
+    query += "WHERE OnlineTutorial.ClassID=\"" + course +"\"";
+    
+    execute(query);
+}
+
+function getSoftware()
+{
+    var query = "SELECT * FROM Software WHERE Software.ClassID=\"" + course +"\"";
+    
+    execute(query);
+}
+
 function getTutors(course)
 {
     var query = "SELECT Student.FName, Student.LName, TutorHours.Weekday, TutorHours.StartTime_Str, TutorHours.EndTime_Str ";
@@ -204,16 +262,8 @@ function getTutors(course)
     execute(query);
 }
 
-/*
- * gets all useful attributes from OnlineTutorials
- */
-function getOnlineTutorials(course)
-{
-    var query = "SELECT Title, ParentSite AS Host, URL FROM OnlineTutorial "; 
-    query += "WHERE OnlineTutorial.ClassID=\"" + course +"\" ORDER BY Title";
-    
-    execute(query);
-}
+/********************************* Advanced queries **********************************/
+
 
 
 /* 
@@ -227,8 +277,9 @@ function loadDB()
     xhr.open('GET', './../Academic-Resources.txt', true);
 
     xhr.onload = function(e) 
-    {    
-        db.run(xhr.responseText); // Run the query without returning anything
+    {   
+        console.log(xhr.responseText);
+        db.run(xhr.responseText); // run the query without returning anything
     };
 
     xhr.send();
@@ -240,6 +291,7 @@ function loadDB()
  */
 function execute(query)
 {
+    console.log(query);
     var result = db.exec(query);
     printResult(result);
 }

@@ -315,6 +315,8 @@ function getOnlineTutorials(course)
     execute(query);
 }
 
+
+
 /*
  * Retrieves user-input parameter, 
  * executes query,
