@@ -12,3 +12,4 @@ INSERT INTO Major VALUES ("BSME", "Mechanical Engineering");
 INSERT INTO Major VALUES ("BSEE", "Electrical Engineering");
 INSERT INTO Major VALUES ("BSCO", "Computer Engineering");
 INSERT INTO Major VALUES ("BELM", "Electromechanical Engineering");
+INSERT INTO Major VALUES ("BSAM", "Applied Mathematics");
