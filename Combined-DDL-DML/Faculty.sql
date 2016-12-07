@@ -1,6 +1,5 @@
 CREATE TABLE `Faculty` (
-	`FacultyID`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`FName`	TEXT,
+	`FacultyID`	INTEGER PRIMARY KEY,
 	`LName`	TEXT,
 	`DepartmentID`	INTEGER,
 	`Building`	TEXT,
@@ -39,13 +38,10 @@ INSERT INTO Faculty VALUES (38, "Durga", "Suresh", 2, "Dobbs", 143, 10.0);
 INSERT INTO Faculty VALUES (39, "Charles", "Wiseman", 2, "Dobbs", 142, 4.9);
 INSERT INTO Faculty VALUES (40, "Hong-Sheng", "Wu", 2, "Dobbs", 133, 4.2);
 INSERT INTO Faculty VALUES (41, "Mira", "Yun", 2, "Dobbs", 133, 3.5);
-
 INSERT INTO Faculty VALUES (42, "Magdy", "Ellabidy", 2, "Dobbs", 139, 3.9);
 INSERT INTO Faculty VALUES (43, "Karina", "Assiter", 2, "Dobbs", 141, 1.9);
 INSERT INTO Faculty VALUES (44, "Nate", "Derbinsky", 2, "Dobbs", 144, 5);
 INSERT INTO Faculty VALUES (45, "Jones", "Yu", 2, "Dobbs", 135, 4.8);
-
-
 INSERT INTO Faculty VALUES (46, "Francis", "Hopcroft", 3, "Annex Central", 308, 3.3);
 INSERT INTO Faculty VALUES (47, "Vitaliy", "Saykin", 3, "Annex South", 101, 2.7);
 INSERT INTO Faculty VALUES (48, "Alborz", "Nakisa", 3, NULL, NULL, 4.0);
