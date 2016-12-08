@@ -119,7 +119,7 @@ function courseQuery()
         case "Software":
             getSoftware(course);
             break;
-        case "Course Reserve Tectbooks":
+        case "Course Reserve Textbooks":
             getCourseReserves(course);
             break
         default: 
@@ -130,7 +130,8 @@ function courseQuery()
 
 function getCourseReserves(course)
 {
-    var query = "SELECT * FROM Textbook WHERE Textbook.ClassID=\"" + course +"\" ";
+    var query = "SELECT Name, ISBN, LibraryAvailability AS 'Library Availabilty' ";
+    query += "FROM Textbook WHERE Textbook.ClassID=\"" + course +"\" ";
     
     execute(query);
 }
@@ -177,12 +178,13 @@ function getSoftware(course)
 
 function getTutors(course)
 {
-    var query = "SELECT Student.FName, Student.LName, TutorHours.Weekday, TutorHours.StartTime_Str, TutorHours.EndTime_Str ";
+    var query = "SELECT Student.FName AS 'First Name', Student.LName AS 'Last Name', TutorHours.Weekday, ";
+    query += "TutorHours.StartTime_Str AS 'Start Time', TutorHours.EndTime_Str AS 'End Time' ";
     query += "FROM Student INNER JOIN Tutor ON Student.StudentID=Tutor.StudentID ";
     query += "INNER JOIN TutorHours ON Tutor.StudentID=Tutor.StudentID ";
     query += "WHERE Tutor.ClassID=\"" + course +"\" ";
-    query += "GROUP BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime_Str, TutorHours.EndTime_Str ";
-    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime_Str, TutorHours.EndTime_Str";
+    query += "GROUP BY 'Last Name', TutorHours.WeekdayID, 'Start Time', 'End Time' ";
+    query += "ORDER BY 'Last Name', TutorHours.WeekdayID, 'Start Time', 'End Time'";
     
     execute(query);
 }
@@ -235,12 +237,34 @@ function createDropdown(parentDiv, text, dropdownId, behavior)
 function populateCourseDropdown(dropdown1)
 {
     addOption(dropdown1, "--");
+    addOption(dropdown1, "CIVE-2000");
+    addOption(dropdown1, "CIVE-2200");
+    addOption(dropdown1, "CIVE-3000");
+    addOption(dropdown1, "CIVE-3000L");
+    addOption(dropdown1, "CIVE-3100");
+    addOption(dropdown1, "CIVE-3200");
+    addOption(dropdown1, "CIVE-3200L");
+    addOption(dropdown1, "CIVE-3300");
+    addOption(dropdown1, "CIVE-3300L");
+    addOption(dropdown1, "CIVE-3500");
+    addOption(dropdown1, "CIVE-3800");
+    addOption(dropdown1, "CIVE-8000");
+    addOption(dropdown1, "CIVE-8200");
+    addOption(dropdown1, "CIVE-8400");
+    addOption(dropdown1, "CIVE-8500");
+    addOption(dropdown1, "CIVE-8550");
     addOption(dropdown1, "COMP-1000");
     addOption(dropdown1, "COMP-1100");
     addOption(dropdown1, "COMP-2000");
+    addOption(dropdown1, "COMP-2500");
+    addOption(dropdown1, "COMP-3071");
+    addOption(dropdown1, "ELEC-2299");
     addOption(dropdown1, "ELEC-3150");
     addOption(dropdown1, "ELEC-2850");
+    addOption(dropdown1, "ENGR-1800");
     addOption(dropdown1, "MECH-1000");
+    addOption(dropdown1, "MECH-2250");
+    addOption(dropdown1, "MECH-3100");
 }
 
 
@@ -476,7 +500,7 @@ function removeForm()
 function loadDB()
 {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./../Academic-Resources.txt", true);
+    xhr.open("GET", "./../Academic-Resources2.txt", true);
 
     xhr.onload = function(e) 
     {   
