@@ -1,4 +1,3 @@
-
 /***************************** Global DOM Handles ******************************/
 
 var outputElm = document.getElementById("output");
@@ -13,8 +12,7 @@ var div3 = document.getElementById("param");
 
 /***************************** Backend preparation *****************************/
 
-var sql = window.SQL;
-
+var sql = window.SQL; // links sql.js
 var db = new sql.Database();
 
 /* 
@@ -36,6 +34,8 @@ window.onload = function()
 function setQuery() 
 {   
     clearAllDynamicElements();
+    
+    clearAllEventListeners();
     
     outputElm.innerHTML = "Results will be displayed here"; // clear output
     
@@ -80,6 +80,15 @@ function clearAllDynamicElements()
     div1.innerHTML = "";
     div2.innerHTML = "";
     div3.innerHTML = "";
+}
+
+function clearAllEventListeners()
+{
+    execBtn.removeEventListener("click", query1); 
+    execBtn.removeEventListener("click", query2); 
+    execBtn.removeEventListener("click", query3); 
+    execBtn.removeEventListener("click", query4); 
+    execBtn.removeEventListener("click", query5); 
 }
 
 /**********************************************************************************/
@@ -146,17 +155,25 @@ function getEbooks(course)
 
 function getFacillitatedStudyGroups(course)
 {
-    var query = "SELECT * FROM FSG WHERE FSG.ClassID=\"" + course +"\" ";
+    var query = "SELECT FSG.Weekday, printf('%s - %s', FSG.StartTime_Str, FSG.EndTime_Str) AS 'Time', ";
+    query += "printf('%s %s', FSG.Building, FSG.RoomNumber) as Location, "
+    query += "printf('%s %s', Faculty.FName, Faculty.LName) AS 'Faculty Leader' ";
+    query += "FROM FSG INNER JOIN Faculty ON FSG.FacultyID=Faculty.FacultyID ";
+    query += "WHERE FSG.ClassID=\"" + course +"\" ";
+    query += "ORDER BY WeekdayID";
 
     execute(query);
 }
 
 function getOfficeHours(course)
 {
-//    var query = "SELECT OfficeHours.Weekday ";
-//    query += "FROM OfficeHours INNER JOIN Faculty ON Faculty.FacultyID=OfficeHours.FacultyID ";
-//    query += "INNER JOIN Class ON Class.FacultyID=Faculty.FacultyID"
-//    query += "WHERE Class.ClassID=\"" + course +"\" ";
+    var query = "SELECT printf('%s %s', Faculty.FName, Faculty.LName) AS Professor, ";
+    query += "OfficeHours.Weekday, printf('%s %s', Faculty.Building, Faculty.RoomNumber) AS Location ,";
+    query += "printf('%s - %s', OfficeHours.StartTime_Str, OfficeHours.EndTime_Str) AS Time "
+    query += "FROM OfficeHours INNER JOIN Faculty ON Faculty.FacultyID=OfficeHours.FacultyID ";
+    query += "INNER JOIN Class ON Class.FacultyID=Faculty.FacultyID ";
+    query += "WHERE Class.ClassID=\"" + course +"\" ";
+    query += "ORDER BY OfficeHours.WeekdayID, OfficeHours.StartTime ";
     
     execute(query);
 }
@@ -178,13 +195,14 @@ function getSoftware(course)
 
 function getTutors(course)
 {
-    var query = "SELECT Student.FName AS 'First Name', Student.LName AS 'Last Name', TutorHours.Weekday, ";
-    query += "TutorHours.StartTime_Str AS 'Start Time', TutorHours.EndTime_Str AS 'End Time' ";
+    var query = "SELECT printf('%s %s', Student.FName, Student.LName) AS 'Student' ,";
+    query += "TutorHours.Weekday, ";
+    query += "printf('%s - %s', TutorHours.StartTime_Str, TutorHours.EndTime_Str) AS Availability ";
     query += "FROM Student INNER JOIN Tutor ON Student.StudentID=Tutor.StudentID ";
-    query += "INNER JOIN TutorHours ON Tutor.StudentID=Tutor.StudentID ";
+    query += "INNER JOIN TutorHours ON TutorHours.StudentID=Tutor.StudentID ";
     query += "WHERE Tutor.ClassID=\"" + course +"\" ";
-    query += "GROUP BY 'Last Name', TutorHours.WeekdayID, 'Start Time', 'End Time' ";
-    query += "ORDER BY 'Last Name', TutorHours.WeekdayID, 'Start Time', 'End Time'";
+    query += "GROUP BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime, TutorHours.EndTime ";
+    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime, TutorHours.EndTime ";
     
     execute(query);
 }
@@ -303,34 +321,42 @@ function addOption(dropdown, text)
  */
 function getParameter(selection)
 {
-    var form = createFormElement();
+    var form = createFormElement("form1");
+    var form2 = createFormElement("form2");
+    var slider = createRangeElement("slider1");
     
     switch(selection)
     {
         case "query1":
-            labelForm(form, "Enter major ID: ");
+            labelElement(form, "Enter major ID: ");
             addInputElementToForm(form, "MajorID", "BCOS");
             break;
         case "query2":
-            labelForm(form, "Enter department name: ");
+            labelElement(form, "Enter department name: ");
             addInputElementToForm(form, "DepartmentID", "Computer Science");
             break;
         case "query3":
-            labelForm(form, "Enter class ID: ");
+            labelElement(form, "Enter class ID: ");
             addInputElementToForm(form, "MajorID", "COMP-1000");
             break;
         case "query4":
-            labelForm(form, "Enter course ID: ");
+            labelElement(form, "Enter class ID: ");
             addInputElementToForm(form, "MajorID", "COMP-2000");
+            labelElement(form2, "Enter search terms, delimitted by commas:  ");
+            addInputElementToForm(form2, "MajorID", "Tree, Linked List, etc.");
+            addElementToHTML(form2);
             break;
         case "query5":
-            labelForm(form, "Enter software name: ");
+            labelElement(form, "Enter software name: ");
             addInputElementToForm(form, "MajorID", "Eclipse");
+            div3.innerHTML = "<br><strong>Select desired professor rating: </strong>";
+            div3.appendChild(slider);
+            labelSlider();
         default:
             break;
     }
     
-    addFormToHTML(form);
+    addElementToHTML(form);
     
     document.getElementById("execute").disabled=false; // enable execute button
 }
@@ -341,14 +367,15 @@ function query1()
     
     var query = "";
     
-    query += "SELECT Student.FName as First_Name, Student.LName as Last_Name, TutorHours.Weekday, ";  
-    query += "TutorHours.StartTime, TutorHours.EndTime, Class.ClassName ";
+    query += "SELECT printf('%s %s', Student.FName, Student.LName) AS 'Student', TutorHours.Weekday, ";  
+    query += "printf('%s - %s', TutorHours.StartTime_Str, TutorHours.EndTime_Str) AS Availability ";
     query += "FROM Tutor INNER JOIN Class ON Tutor.ClassID = Class.ClassID ";
     query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
     query += "INNER JOIN Major ON Department.DepartmentID = Major.DepartmentID ";
     query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID ";
     query += "INNER JOIN TutorHours ON TutorHours.StudentID = Tutor.StudentID ";
     query += "WHERE Major.MajorID=\"" + param + "\" ";
+    query += "GROUP BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime ";
     query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime;";
 
     execute(query);
@@ -364,19 +391,15 @@ function query2()
     
     var query = "";
     
-    query += "SELECT Class.ClassID, Class.ClassName, Count(DISTINCT Ebook.ISBN) as eBooks_Available ";
+    query += "SELECT Class.ClassID, Class.ClassName AS Class, Count(DISTINCT Ebook.ISBN) as eBooks_Available ";
     query += "FROM Ebook INNER JOIN Class ON Class.ClassID = Ebook.ClassID ";
     query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
     query += "INNER JOIN Major ON Major.DepartmentID = Department.DepartmentID ";
-    query += "Where Department.DepartmentName LIKE \"%" + param + "%\" ";
+    query += "WHERE Department.DepartmentName LIKE \"%" + param + "%\" ";
     query += "GROUP BY Class.ClassID ";
     query += "Order By eBooks_Available DESC, Class.ClassName ";
     
     execute(query);
-    
-    removeForm();
-    
-    execBtn.removeEventListener("click", query2); 
 }
 
 function query3()
@@ -398,30 +421,30 @@ function query3()
     query += "ORDER BY Student.LName, TutorHours.Weekday, TutorHours.StartTime; ";
     
     execute(query);
-    
-    removeForm();
-    
-    execBtn.removeEventListener("click", query3); 
 }
 
 function query4()
 {
     var param = document.getElementById("form1").elements[0].value;
     
+    var searchBox = document.getElementById("form2").elements[0].value;
+    
+    var searchTerms = searchBox.split(", ");
+    
     var query = "";
     
-    query += "SELECT OnlineTutorial.Title, OnlineTutorial.URL ";
+    query += "SELECT OnlineTutorial.Title, Class.ClassName AS Class, OnlineTutorial.URL ";
     query += "FROM OnlineTutorial INNER JOIN Class ON OnlineTutorial.ClassID = Class.ClassID ";
-    query += "Where Class.ClassID=\"" + param + "\" OR OnlineTutorial.Title=\"trees\" OR ";
-	query += "OnlineTutorial.Title LIKE \"%stack%\" OR OnlineTutorial.Title LIKE \"%binary tree%\" OR ";
-	query += "OnlineTutorial.Title LIKE \"%linked list%\" OR OnlineTutorial.Title LIKE \"%trees%\" ";
+    query += "Where Class.ClassID=\"" + param + "\" ";
+    
+    for (var i = 0; i < searchTerms.length; i++)
+    {
+        query += "OR OnlineTutorial.Title LIKE \"%" + searchTerms[i] + "%\" ";
+    }
+    
     query += "Order By OnlineTutorial.Title, OnlineTutorial.TutorialID ";
     
     execute(query);
-    
-    removeForm();
-    
-    execBtn.removeEventListener("click", query4); 
 }
 
 
@@ -429,41 +452,71 @@ function query5()
 {   
     var param = document.getElementById("form1").elements[0].value;
     
+    var rating = document.getElementById("slider1").value;
+    
     var query = "";
     
     query += "SELECT Class.ClassID, Class.ClassName, Faculty.FName AS Professor_FirstName, ";
     query += "Faculty.LName AS Professor_LastName, Faculty.Rating AS RateMyProfessor_Rating ";
     query += "FROM Faculty INNER JOIN Class ON Faculty.facultyID = Class.FacultyID ";
     query += "INNER JOIN Software ON Software.ClassID = Class.ClassID ";
-    query += "WHERE Faculty.Rating >= 3 AND Software.Name=\"" + param +"\" ";
+    query += "WHERE Faculty.Rating >= " + rating + " AND Software.Name=\"" + param + "\" ";
     query += "ORDER BY Faculty.Rating DESC, Class.ClassName";
     
+    alert(query);
+    
     execute(query);
-    
-    removeForm();
-    
-    execBtn.removeEventListener("click", query5); 
 }
 
 /***************************************************************************************************/
 
 /**************************** DOM manipulation for advanced queries ********************************/
 
-function createFormElement()
+function createRangeElement(id)
+{
+    var slider = document.createElement("input");
+    slider.type = "range";
+    slider.id = id;
+    slider.min = 0;
+    slider.max = 5;
+    slider.step = 0.1;
+    slider.oninput = updateValue;
+    
+    return slider;
+}
+
+function labelSlider()
+{
+    var slider = document.getElementById("slider1");
+    var div = document.createElement("strong");
+    div.id = "sliderDiv";
+    div.textContent = " " + slider.value;
+    div3.appendChild(div);
+}
+
+function updateValue(val) 
+{
+    var slider = document.getElementById("slider1");
+    var div = document.getElementById("sliderDiv");
+
+    div.textContent = " " + slider.value;
+}
+
+function createFormElement(id)
 {   
     var form = document.createElement("form");
-    form.setAttribute("id", "form1");
+    form.setAttribute("id", id);
     
     return form;
 }
 
-function labelForm(form, label)
+function labelElement(element, label)
 {
-    form.appendChild(document.createElement("br"));
+    element.appendChild(document.createElement("br"));
     
     var text = document.createElement("strong");
     text.innerHTML = label;
-    form.appendChild(text);
+    element.appendChild(text);
 }
 
 function addInputElementToForm(form, name, value)
@@ -477,10 +530,10 @@ function addInputElementToForm(form, name, value)
     form.appendChild(input);
 }
 
-function addFormToHTML(form)
+function addElementToHTML(element)
 {   
-    var element = document.getElementById("param");
-    element.appendChild(form);  
+    var parent = document.getElementById("param");
+    parent.appendChild(element);  
 }
 
 function removeForm()
@@ -500,7 +553,7 @@ function removeForm()
 function loadDB()
 {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./../Academic-Resources2.txt", true);
+    xhr.open("GET", "./../Academic-Resources2.sql", true);
 
     xhr.onload = function(e) 
     {   

@@ -173,9 +173,7 @@ function labelForm(form, label)
     form.appendChild(document.createElement("br"));
     
     var text = document.createElement("strong");
-    
     text.innerHTML = label;
-    
     form.appendChild(text);
 }
 
