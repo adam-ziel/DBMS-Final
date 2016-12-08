@@ -132,4 +132,10 @@ INSERT INTO Software VALUES (132,"http://www.solidworks.com/sw/products/3d-cad/p
 INSERT INTO Software VALUES (133,"https://bridgecontest.org/resources/download/","West Point Bridge Designer", "MECH-2250");
 INSERT INTO Software VALUES (134,"https://www.oracle.com/applications/primavera/products/project-management.html","Primavera P6 Professional","CIVE-2000"
 INSERT INTO Software VALUES (135,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-2000");
+INSERT INTO Software VALUES (136,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3800");
+INSERT INTO Software VALUES (137,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-2200");
+INSERT INTO Software VALUES (138,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3000");
+INSERT INTO Software VALUES (139,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3300");
+INSERT INTO Software VALUES (140,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3500");
+			     
 			     
