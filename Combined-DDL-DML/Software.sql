@@ -129,4 +129,5 @@ INSERT INTO Software VALUES (129, "https://www.mathworks.com/programs/trials/tri
 INSERT INTO Software VALUES (130, "https://lumen.ni.com/nicif/us/academicevalmultisim/content.xhtml" , "Multisim", "ELEC-2299");
 INSERT INTO Software VALUES (131, "http://www.keysight.com/en/pd-1476554-pn-W4000D/vee-pro-932?cc=US&lc=eng","Agilent VEE","ELEC-2299");
 INSERT INTO Software VALUES (132,"http://www.solidworks.com/sw/products/3d-cad/packages.htm","Solidworks","MECH-3100");
-			
+INSERT INTO Software VALUES (133,"https://bridgecontest.org/resources/download/","West Point Bridge Designer", "MECH-2250");
+
