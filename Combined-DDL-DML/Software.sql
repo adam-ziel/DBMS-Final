@@ -12,7 +12,6 @@ INSERT INTO Software VALUES (2, "https://www.wit.edu/sites/default/files/technol
 INSERT INTO Software VALUES (3, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-2500");
 INSERT INTO Software VALUES (4, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-2000");
 INSERT INTO Software VALUES (5, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-3071");
-INSERT INTO Software VALUES (6, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-3071");
 INSERT INTO Software VALUES (9, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Apache Tomcat", "COMP-1000");
 INSERT INTO Software VALUES (10, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Apache Tomcat", "COMP-1100");
 INSERT INTO Software VALUES (11, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Apache Tomcat", "COMP-2500");
@@ -51,8 +50,6 @@ INSERT INTO Software VALUES (47, "https://www.wit.edu/sites/default/files/techno
 INSERT INTO Software VALUES (48, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Database Tool Box", "COMP-1000");
 INSERT INTO Software VALUES (49, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Database Tool Box", "COMP-1100");
 INSERT INTO Software VALUES (50, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Database Tool Box", "COMP-2500");
-INSERT INTO Software VALUES (51, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Database Tool Box", "COMP-2000");
-INSERT INTO Software VALUES (52, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Database Tool Box", "COMP-3071");
 INSERT INTO Software VALUES (53, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Computational Biology", "COMP-1000");
 INSERT INTO Software VALUES (54, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Computational Biology", "COMP-1100");
 INSERT INTO Software VALUES (55, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Computational Biology", "COMP-2500");
@@ -128,3 +125,5 @@ INSERT INTO Software VALUES (125, "https://www.wit.edu/sites/default/files/techn
 INSERT INTO Software VALUES (126, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Visual Studio Professional Edition", "COMP-2500");
 INSERT INTO Software VALUES (127, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Visual Studio Professional Edition", "COMP-2000");
 INSERT INTO Software VALUES (128, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Visual Studio Professional Edition", "COMP-3071");
+INSERT INTO Software VALUES (129, "https://www.mathworks.com/programs/trials/trial_request.html" , "Matlab", "ENGR-1800");
+INSERT INTO Software VALUES (130, "https://lumen.ni.com/nicif/us/academicevalmultisim/content.xhtml" , "Multisim", "ELEC-2299");
