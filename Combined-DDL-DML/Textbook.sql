@@ -8,7 +8,6 @@ CREATE TABLE "Textbook" (
 );
 
 INSERT INTO Textbook VALUES (9780133451603, "Statics and Mechanics of Materials, 4th edition", "Available", "CIVE-2000");
-INSERT INTO Textbook VALUES (NULL, NULL, NULL, "CIVE-3800");
 INSERT INTO Textbook VALUES (9781587133169, "Introduction To Networks Companion Guide", "Available", "COMP-1100");
 INSERT INTO Textbook VALUES (9780133085044, "A Practical Guide to Linux Commands, Editors, and Shell Programming, 2E", "Available", "COMP-1100");
 INSERT INTO Textbook VALUES (9781305093911, "Security+ Guide to Network Security Fundamentals, 5e, Boston, MA. Course Technology", "Available", "COMP-2500");
@@ -21,6 +20,3 @@ INSERT INTO Textbook VALUES (9781118974865, "Fundamentals of Engineering Thermod
 INSERT INTO Textbook VALUES (9780133128741, "Manufacturing Engineering & Technology (7th Edition)", "Available", "MANF-2000");
 INSERT INTO Textbook VALUES (9789339221638, "Shigley's Mechnical Engineering Design, 10th ed.", "Available", "MECH-3000");
 INSERT INTO Textbook VALUES (9780128045251, "Matlab, Fourth Edition: A Practical Introduction to Programming and Problem Solving", "Available", "ENGR-1800");
-
-
-
