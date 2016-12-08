@@ -1,6 +1,7 @@
 CREATE TABLE "FSG" (
 	`FSGID`	INTEGER,
 	`Weekday`	TEXT,
+	`WeekdayId`	INT,
 	`StartTime`	INTEGER,
 	`EndTime`	INTEGER,
 	`Building`	TEXT,
@@ -14,5 +15,5 @@ CREATE TABLE "FSG" (
 	FOREIGN KEY(`ClassID`) REFERENCES `Class`(`ClassID`)
 );
 
-INSERT INTO FSG VALUES (1, "Wednesday", 1800, 2000, "Wentworth Hall", 214, 4, 3, "COMP-1000");
-INSERT INTO FSG VALUES (2, "Thursday", 1800, 2000, "Wentworth Hall", 214, 4, 3, "COMP-1000");
+INSERT INTO FSG VALUES (1, "Wednesday",3, 1800, 2000, "Wentworth Hall", 214, 4, 3, "COMP-1000");
+INSERT INTO FSG VALUES (2, "Thursday",4, 1800, 2000, "Wentworth Hall", 214, 4, 3, "COMP-1000");
