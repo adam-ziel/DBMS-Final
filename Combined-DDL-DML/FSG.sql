@@ -1,7 +1,7 @@
 CREATE TABLE "FSG" (
 	`FSGID`	INTEGER,
 	`Weekday`	TEXT,
-	`WeekdayId`	INT,
+	`WeekdayId`	INTEGER,
 	`StartTime`	INTEGER,
 	`EndTime`	INTEGER,
 	`Building`	TEXT,
