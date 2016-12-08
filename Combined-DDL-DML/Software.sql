@@ -130,4 +130,6 @@ INSERT INTO Software VALUES (130, "https://lumen.ni.com/nicif/us/academicevalmul
 INSERT INTO Software VALUES (131, "http://www.keysight.com/en/pd-1476554-pn-W4000D/vee-pro-932?cc=US&lc=eng","Agilent VEE","ELEC-2299");
 INSERT INTO Software VALUES (132,"http://www.solidworks.com/sw/products/3d-cad/packages.htm","Solidworks","MECH-3100");
 INSERT INTO Software VALUES (133,"https://bridgecontest.org/resources/download/","West Point Bridge Designer", "MECH-2250");
-
+INSERT INTO Software VALUES (134,"https://www.oracle.com/applications/primavera/products/project-management.html","Primavera P6 Professional","CIVE-2000"
+INSERT INTO Software VALUES (135,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-2000");
+			     
