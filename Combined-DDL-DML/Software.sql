@@ -127,3 +127,6 @@ INSERT INTO Software VALUES (127, "https://www.wit.edu/sites/default/files/techn
 INSERT INTO Software VALUES (128, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf" , "Visual Studio Professional Edition", "COMP-3071");
 INSERT INTO Software VALUES (129, "https://www.mathworks.com/programs/trials/trial_request.html" , "Matlab", "ENGR-1800");
 INSERT INTO Software VALUES (130, "https://lumen.ni.com/nicif/us/academicevalmultisim/content.xhtml" , "Multisim", "ELEC-2299");
+INSERT INTO Software VALUES (131, "http://www.keysight.com/en/pd-1476554-pn-W4000D/vee-pro-932?cc=US&lc=eng","Agilent VEE","ELEC-2299");
+INSERT INTO Software VALUES (132,"http://www.solidworks.com/sw/products/3d-cad/packages.htm","Solidworks","MECH-3100");
+			
