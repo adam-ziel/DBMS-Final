@@ -30,3 +30,12 @@ INSERT INTO OnlineTutorial VALUES(19,"https://www.lynda.com/-tutorials/Hardware-
 INSERT INTO OnlineTutorial VALUES(20,"https://www.lynda.com/-tutorials/Software-firewalls/497309/513398-4.html","Software firewalls","Lynda","COMP-2500");
 INSERT INTO OnlineTutorial VALUES(21,"https://www.lynda.com/-tutorials/Data-destruction/497309/513399-4.html","Data destruction","Lynda","COMP-2500");
 INSERT INTO OnlineTutorial VALUES(22,"https://www.lynda.com/-tutorials/Incident-response/497309/513400-4.html","Incident response","Lynda","COMP-2500");
+INSERT INTO OnlineTutorial VALUES(23,"https://www.lynda.com/MATLAB-tutorials/Understanding-MATLAB-interface/124067/138167-4.html","Understanding the MATLAB interface","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(24,"https://www.lynda.com/MATLAB-tutorials/Working-MATLAB-variables/124067/138168-4.html","Working with MATLAB variables","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(25,"https://www.lynda.com/MATLAB-tutorials/Everything-matrix/124067/138169-4.html","Everything is a matrix","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(26,"https://www.lynda.com/MATLAB-tutorials/Understanding-data-structures/124067/138170-4.html","Understanding data structures","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(27,"https://www.lynda.com/MATLAB-tutorials/Basic-commands/124067/138172-4.html","Basic commands","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(28,"https://www.lynda.com/MATLAB-tutorials/Using-built-functions-variables/124067/138173-4.html","Using built-in functions and variables","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(29,"https://www.lynda.com/MATLAB-tutorials/Working-matrix-scalar-operations/124067/138174-4.html","Working with matrix and scalar operations","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(30,"https://www.lynda.com/MATLAB-tutorials/Control-flow/124067/138175-4.html","Control flow","Lynda","ENGR-1800");
+INSERT INTO OnlineTutorial VALUES(31,"https://www.lynda.com/MATLAB-tutorials/Understanding-data-types/124067/138176-4.html","Understanding data types","Lynda","ENGR-1800");
