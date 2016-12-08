@@ -137,5 +137,7 @@ INSERT INTO Software VALUES (137,"http://www.design-simulation.com/ip/","Interac
 INSERT INTO Software VALUES (138,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3000");
 INSERT INTO Software VALUES (139,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3300");
 INSERT INTO Software VALUES (140,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3500");
+INSERT INTO Software VALUES (141,"http://www.autodesk.com/products/autocad-civil-3d/overview","Civil 3D","CIVE-8500");
+INSERT INTO Software VALUES (142,"http://www.autodesk.com/products/autocad-civil-3d/overview","Civil 3D","CIVE-8550");
 			     
 			     
