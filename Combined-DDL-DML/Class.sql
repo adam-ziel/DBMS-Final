@@ -15,6 +15,7 @@ INSERT INTO Class VALUES ("COMP-1100", "Intro To Networks", "Fall", 2016, 2, 43)
 INSERT INTO Class VALUES ("COMP-2500", "Security Principles", "Fall", 2016, 2, 42);
 INSERT INTO Class VALUES ("COMP-2000", "Data Structures", "Fall", 2016, 2, 43);
 INSERT INTO Class VALUES ("COMP-3071", "Intro To Programming Languages", "Fall", 2016, 2, 43);
+INSERT INTO Class VALUES ("COMP-2670, "Database Management Systems", "Fall", 2016, 2, 38);
 INSERT INTO Class VALUES ("CIVE-2000", "Statics and Mechanics of Materials 1", "Fall", 2016, 3, 47);
 INSERT INTO Class VALUES ("CIVE-3800", "EPIC Projects in Civil Engineering 1", "Fall", 2016, 3, 46);
 INSERT INTO Class VALUES ("CIVE-2200", "Intro to Geomatics", "Fall", 2016, 3, 27);
