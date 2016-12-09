@@ -20,3 +20,4 @@ INSERT INTO Textbook VALUES (9781118974865, "Fundamentals of Engineering Thermod
 INSERT INTO Textbook VALUES (9780133128741, "Manufacturing Engineering & Technology (7th Edition)", "Available", "MANF-2000");
 INSERT INTO Textbook VALUES (9789339221638, "Shigley's Mechnical Engineering Design, 10th ed.", "Available", "MECH-3000");
 INSERT INTO Textbook VALUES (9780128045251, "Matlab, Fourth Edition: A Practical Introduction to Programming and Problem Solving", "Available", "ENGR-1800");
+INSERT INTO Textbook VALUEs (9780133970777, "Fundamentals of Database Systems, 7th ed. Addison-Wesley, 2016", "Available","COMP-2670");
