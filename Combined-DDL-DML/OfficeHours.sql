@@ -86,8 +86,8 @@ INSERT INTO OfficeHours VALUES (36, "Friday", 5, 1100, 1200, "11:00 AM", "12:00 
 INSERT INTO OfficeHours VALUES (37, "Tuesday", 2, 1000, 1200, "10:00 AM", "12:00 PM");
 INSERT INTO OfficeHours VALUES (37, "Thursday", 4, 1000, 1200, "10:00 AM", "12:00 PM");
 INSERT INTO OfficeHours VALUES (38, "Monday", 1, 1100, 1200, "11:00 AM", "12:00 PM");
-INSERT INTO OfficeHours VALUES (38, "Tuesday", 2, 800, 950, "8:00 AM", "9:50 AM");
 INSERT INTO OfficeHours VALUES (38, "Wednesday", 3, 1100, 1200, "11:00 AM", "12:00 PM");
+INSERT INTO OfficeHours VALUES (38, "Friday", 5, 1100, 1200, "11:00 AM", "12:00 PM");
 INSERT INTO OfficeHours VALUES (39, "Monday", 1, 1100, 1200, "11:00 AM", "12:00 PM");
 INSERT INTO OfficeHours VALUES (39, "Tuesday", 2, 800, 950, "8:00 AM", "9:50 AM");
 INSERT INTO OfficeHours VALUES (39, "Wednesday", 3, 1100, 1200, "11:00 AM", "12:00 PM");
