@@ -259,19 +259,9 @@ function populateCourseDropdown(dropdown1)
     addOption(dropdown1, "CIVE-2000");
     addOption(dropdown1, "CIVE-2200");
     addOption(dropdown1, "CIVE-3000");
-    addOption(dropdown1, "CIVE-3000L");
     addOption(dropdown1, "CIVE-3100");
     addOption(dropdown1, "CIVE-3200");
-    addOption(dropdown1, "CIVE-3200L");
     addOption(dropdown1, "CIVE-3300");
-    addOption(dropdown1, "CIVE-3300L");
-    addOption(dropdown1, "CIVE-3500");
-    addOption(dropdown1, "CIVE-3800");
-    addOption(dropdown1, "CIVE-8000");
-    addOption(dropdown1, "CIVE-8200");
-    addOption(dropdown1, "CIVE-8400");
-    addOption(dropdown1, "CIVE-8500");
-    addOption(dropdown1, "CIVE-8550");
     addOption(dropdown1, "COMP-1000");
     addOption(dropdown1, "COMP-1100");
     addOption(dropdown1, "COMP-2000");
@@ -326,6 +316,40 @@ function populateMajorDropdown(dropdown)
     addOption(dropdown, "BELM");
 }
 
+function populateSoftwareDropdown(dropdown)
+{
+    addOption(dropdown, "--");
+    addOption(dropdown, "Adobe Reader DC");
+    addOption(dropdown, "Apache Tomcat");
+    addOption(dropdown, "Bonjour");
+    addOption(dropdown, "TASM");
+    addOption(dropdown, "Eclipse");
+    addOption(dropdown, "Kexi FileMaker Pro");
+    addOption(dropdown, "MATLAB");
+    addOption(dropdown, "Symbolic Math Tool Box");
+    addOption(dropdown, "Database Tool Box");
+    addOption(dropdown, "Computational Biology");
+    addOption(dropdown, "Bioinformatics Tool Box");
+    addOption(dropdown, "Sim-Biology");
+    addOption(dropdown, "CutePDF");
+    addOption(dropdown, "Java DB");
+    addOption(dropdown, "Java (TM)SE Development Kit");
+    addOption(dropdown, "Java Runtime Environment");
+    addOption(dropdown, "Java SDK");
+    addOption(dropdown, "Java Production Kit");
+    addOption(dropdown, "Office Visio Professional");
+    addOption(dropdown, "Visual Studio Professional Edition");
+    addOption(dropdown, "Matlab");
+    addOption(dropdown, "Multisim");
+    addOption(dropdown, "Agilent VEE");
+    addOption(dropdown, "Solidworks");
+    addOption(dropdown, "West Point Bridge Designer");
+    addOption(dropdown, "Primavera P6 Professional");
+    addOption(dropdown, "Interactive Physics");
+    addOption(dropdown, "Civil 3D");
+    addOption(dropdown, "Sage Timberline Estimating Extended");
+}
+
 /*
  * populates dropdown with all available resources
  */
@@ -372,11 +396,12 @@ function getParameter(selection)
             document.getElementById("execute").disabled=false; // enable execute button
             break;
         case "query5":
-            labelElement(form, "Enter software name: ");
-            addInputElementToForm(form, "MajorID", "Eclipse");
             div3.innerHTML = "<br><strong>Select desired professor rating: </strong>";
             div3.appendChild(slider);
             labelSlider();
+            div3.appendChild(document.createElement("br"));
+            createDropdown(div3, "Enter a piece of software: ", "dropdown3", query5);
+            populateSoftwareDropdown(dropdown3);
             document.getElementById("execute").disabled=false; // enable execute button
         default:
             break;
@@ -395,14 +420,14 @@ function query1()
     query += "SELECT printf('%s %s', Student.FName, Student.LName) AS 'Student', TutorHours.Weekday, ";  
     query += "printf('%s - %s', TutorHours.StartTime_Str, TutorHours.EndTime_Str) AS Availability ";
     query += "FROM Tutor INNER JOIN Class ON Tutor.ClassID = Class.ClassID ";
-    query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
-    query += "INNER JOIN Major ON Department.DepartmentID = Major.DepartmentID ";
-    query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID ";
+    query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID "; 
+    query += "INNER JOIN Major ON Department.MajorID = Major.MajorID ";
+    query += "INNER JOIN Student ON Tutor.StudentID = Student.StudentID "; 
     query += "INNER JOIN TutorHours ON TutorHours.StudentID = Tutor.StudentID ";
     query += "WHERE Major.MajorID=\"" + param + "\" ";
     query += "GROUP BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime ";
-    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime;";
-
+    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime ";
+    
     execute(query);
 }
 
@@ -416,7 +441,7 @@ function query2()
     query += "SELECT Class.ClassID, Class.ClassName AS Class, Count(DISTINCT Ebook.ISBN) as eBooks_Available ";
     query += "FROM Ebook INNER JOIN Class ON Class.ClassID = Ebook.ClassID ";
     query += "INNER JOIN Department ON Class.DepartmentID = Department.DepartmentID ";
-    query += "INNER JOIN Major ON Major.DepartmentID = Department.DepartmentID ";
+    query += "INNER JOIN Major ON Major.MajorID = Department.MajorID ";
     query += "WHERE Department.DepartmentName LIKE \"%" + param + "%\" ";
     query += "GROUP BY Class.ClassID ";
     query += "Order By eBooks_Available DESC, Class.ClassName ";
@@ -431,17 +456,19 @@ function query3()
     
     var query = "";
     
-    query += "SELECT Student.FName,Student.LName, TutorHours.Weekday, TutorHours.StartTime, TutorHours.EndTime ";
-    query += "FROM Tutor JOIN Class on Tutor.ClassID = Class.ClassID ";
+    query += "SELECT printf('%s %s', Student.FName, Student.LName) as Student, ";
+    query += "TutorHours.Weekday, ";
+    query += "printf('%s - %s', TutorHours.StartTime_Str, TutorHours.EndTime_str) AS Availability ";
+    query += "FROM Tutor INNER JOIN Class on Tutor.ClassID = Class.ClassID ";
     query += "Inner Join Faculty on Faculty.FacultyID = Class.FacultyID ";
     query += "Inner Join OfficeHours on Faculty.FacultyID = OfficeHours.FacultyID ";
     query += "Inner Join TutorHours on TutorHours.StudentID = Tutor.StudentID ";
     query += "Inner Join Student on Student.StudentID = Tutor.StudentID ";
-    query += "WHERE (Class.ClassName=\"" + param + "\" ";
-    query += "AND (TutorHours.WeekDay = OfficeHours.Weekday AND OfficeHours.StartTime >= TutorHours.EndTime ";
+    query += "WHERE Class.ClassID=\"" + param + "\" ";
+    query += "AND ((TutorHours.WeekDay = OfficeHours.Weekday AND OfficeHours.StartTime >= TutorHours.EndTime ";
     query += "AND OfficeHours.EndTime <= TutorHours.StartTime) OR (TutorHours.Weekday != OfficeHours.WeekDay)) ";
-    query += "GROUP BY Tutor.StudentID, TutorHours.Weekday ";
-    query += "ORDER BY Student.LName, TutorHours.Weekday, TutorHours.StartTime; ";
+    query += "GROUP BY Tutor.StudentID, TutorHours.WeekdayID, TutorHours.StartTime ";
+    query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime; ";
     
     execute(query);
 }
@@ -460,9 +487,10 @@ function query4()
     query += "FROM OnlineTutorial INNER JOIN Class ON OnlineTutorial.ClassID = Class.ClassID ";
     query += "Where Class.ClassID=\"" + param + "\" ";
     
-    for (var i = 0; i < searchTerms.length; i++)
+    if (searchBox != "")
     {
-        query += "OR OnlineTutorial.Title LIKE \"%" + searchTerms[i] + "%\" ";
+        for (var i = 0; i < searchTerms.length; i++)
+            query += "OR OnlineTutorial.Title LIKE \"%" + searchTerms[i] + "%\" ";
     }
     
     query += "Order By OnlineTutorial.Title, OnlineTutorial.TutorialID ";
@@ -473,7 +501,8 @@ function query4()
 
 function query5()
 {   
-    var param = document.getElementById("form1").elements[0].value;
+    var dropdown = document.getElementById("dropdown3");
+    var param = dropdown.options[dropdown.selectedIndex].text;
     var rating = document.getElementById("slider1").value;
     
     var query = "";
@@ -574,7 +603,7 @@ function removeForm()
 function loadDB()
 {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./../Academic-Resources2.sql", true);
+    xhr.open("GET", "./../Academic-Resources2.txt", true);
 
     xhr.onload = function(e) 
     {   
