@@ -48,3 +48,7 @@ INSERT INTO Software VALUES (140,"http://www.design-simulation.com/ip/","Interac
 INSERT INTO Software VALUES (141,"http://www.autodesk.com/products/autocad-civil-3d/overview","Civil 3D","CIVE-8500");
 INSERT INTO Software VALUES (142,"http://www.autodesk.com/products/autocad-civil-3d/overview","Civil 3D","CIVE-8550");
 INSERT INTO Software VALUES (143,"http://www.sage.com/us/sage-construction/sage-estimating","Sage Timberline Estimating Extended","CIVE-3200");
+INSERT INTO Software VALUES (144,"https://files.phpmyadmin.net/phpMyAdmin/4.6.5.2/phpMyAdmin-4.6.5.2-all-languages.zip","phpmyadmin","COMP-2670");
+INSERT INTO Software VALUES (145,"https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/DB.Browser.for.SQLite-3.9.1-win64.exe","Sqllite Browser","COMP-2670");
+
+
