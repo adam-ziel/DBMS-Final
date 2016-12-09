@@ -22,6 +22,7 @@ window.onload = function()
 {
     loadDB();
     document.getElementById("selectQuery").disabled=false; // enable query dropdown
+    setQuery();
 }
 
 /********************************************************************************/
@@ -277,8 +278,6 @@ function populateCourseDropdown(dropdown1)
     addOption(dropdown1, "COMP-2500");
     addOption(dropdown1, "COMP-3071");
     addOption(dropdown1, "ELEC-2299");
-    addOption(dropdown1, "ELEC-3150");
-    addOption(dropdown1, "ELEC-2850");
     addOption(dropdown1, "ENGR-1800");
     addOption(dropdown1, "MECH-1000");
     addOption(dropdown1, "MECH-2250");
@@ -301,6 +300,31 @@ function populateResourceDropdown(dropdown2)
     addOption(dropdown2, "Tutors");
 }
 
+function populateDepartmentDropdown(dropdown)
+{
+    addOption(dropdown, "--");
+    addOption(dropdown, "Civil Engineering");
+    addOption(dropdown, "Computer Science");
+    addOption(dropdown, "Computer Networking");
+    addOption(dropdown, "Biomedical Engineering");
+    addOption(dropdown, "Mechanical Engineering");
+    addOption(dropdown, "Electrical Engineering");
+    addOption(dropdown, "Computer Engineering");
+    addOption(dropdown, "Electromechanical Engineering");
+}
+
+function populateMajorDropdown(dropdown)
+{
+    addOption(dropdown, "--");
+    addOption(dropdown, "BSCE");
+    addOption(dropdown, "BCOS");
+    addOption(dropdown, "BSCN");
+    addOption(dropdown, "BMED");
+    addOption(dropdown, "BSME");
+    addOption(dropdown, "BSEE");
+    addOption(dropdown, "BSCO");
+    addOption(dropdown, "BELM");
+}
 
 /*
  * populates dropdown with all available resources
@@ -328,23 +352,24 @@ function getParameter(selection)
     switch(selection)
     {
         case "query1":
-            labelElement(form, "Enter major ID: ");
-            addInputElementToForm(form, "MajorID", "BCOS");
+            createDropdown(div3, "Enter a major: ", "dropdown3", query1);
+            populateMajorDropdown(dropdown3);
             break;
         case "query2":
-            labelElement(form, "Enter department name: ");
-            addInputElementToForm(form, "DepartmentID", "Computer Science");
+            createDropdown(div3, "Enter a department: ", "dropdown3", query2);
+            populateDepartmentDropdown(dropdown3);
             break;
         case "query3":
-            labelElement(form, "Enter class ID: ");
-            addInputElementToForm(form, "MajorID", "COMP-1000");
+            createDropdown(div3, "Enter a class: ", "dropdown3", query3);
+            populateCourseDropdown(dropdown3);
             break;
         case "query4":
-            labelElement(form, "Enter class ID: ");
-            addInputElementToForm(form, "MajorID", "COMP-2000");
+            createDropdown(div3, "Enter a class: ", "dropdown3", "");
+            populateCourseDropdown(dropdown3);
             labelElement(form2, "Enter search terms, delimitted by commas:  ");
-            addInputElementToForm(form2, "MajorID", "Tree, Linked List, etc.");
+            addInputElementToForm(form2, "MajorID", "");
             addElementToHTML(form2);
+            document.getElementById("execute").disabled=false; // enable execute button
             break;
         case "query5":
             labelElement(form, "Enter software name: ");
@@ -352,18 +377,18 @@ function getParameter(selection)
             div3.innerHTML = "<br><strong>Select desired professor rating: </strong>";
             div3.appendChild(slider);
             labelSlider();
+            document.getElementById("execute").disabled=false; // enable execute button
         default:
             break;
     }
     
     addElementToHTML(form);
-    
-    document.getElementById("execute").disabled=false; // enable execute button
 }
 
 function query1()
 {   
-    var param = document.getElementById("form1").elements[0].value;
+    var dropdown = document.getElementById("dropdown3");
+    var param = dropdown.options[dropdown.selectedIndex].text;
     
     var query = "";
     
@@ -379,15 +404,12 @@ function query1()
     query += "ORDER BY Student.LName, TutorHours.WeekdayID, TutorHours.StartTime;";
 
     execute(query);
-    
-    removeForm();
-    
-    execBtn.removeEventListener("click", query1); 
 }
 
 function query2()
 {
-    var param = document.getElementById("form1").elements[0].value;
+    var dropdown = document.getElementById("dropdown3");
+    var param = dropdown.options[dropdown.selectedIndex].text;
     
     var query = "";
     
@@ -404,7 +426,8 @@ function query2()
 
 function query3()
 {
-    var param = document.getElementById("form1").elements[0].value;
+    var dropdown = document.getElementById("dropdown3");
+    var param = dropdown.options[dropdown.selectedIndex].text;
     
     var query = "";
     
@@ -424,11 +447,11 @@ function query3()
 }
 
 function query4()
-{
-    var param = document.getElementById("form1").elements[0].value;
+{    
+    var dropdown = document.getElementById("dropdown3");
+    var param = dropdown.options[dropdown.selectedIndex].text;
     
     var searchBox = document.getElementById("form2").elements[0].value;
-    
     var searchTerms = searchBox.split(", ");
     
     var query = "";
@@ -451,7 +474,6 @@ function query4()
 function query5()
 {   
     var param = document.getElementById("form1").elements[0].value;
-    
     var rating = document.getElementById("slider1").value;
     
     var query = "";
@@ -462,8 +484,6 @@ function query5()
     query += "INNER JOIN Software ON Software.ClassID = Class.ClassID ";
     query += "WHERE Faculty.Rating >= " + rating + " AND Software.Name=\"" + param + "\" ";
     query += "ORDER BY Faculty.Rating DESC, Class.ClassName";
-    
-    alert(query);
     
     execute(query);
 }
@@ -526,6 +546,7 @@ function addInputElementToForm(form, name, value)
     input.setAttribute("type", "text");
     input.setAttribute("name", name);
     input.setAttribute("value", value);
+    input.placeholder="Linked List, Tree, Stack";
     
     form.appendChild(input);
 }
