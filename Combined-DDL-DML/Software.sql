@@ -4,7 +4,7 @@ CREATE TABLE "Software" (
 	`Name`	TEXT,
 	`ClassID`	TEXT,
 	PRIMARY KEY(`SoftwareID`),
-	FOREIGN KEY(`ClassID`) REFERENCES Class(ClassID)
+	FOREIGN KEY(`ClassID`) REFERENCES Class(`ClassID`)
 );
 
 INSERT INTO Software VALUES (1, "https://www.wit.edu/sites/default/files/technology-services/pdfs/CSS-Software%202015.pdf","Adobe Reader DC", "COMP-1000");
@@ -38,7 +38,7 @@ INSERT INTO Software VALUES (130, "https://lumen.ni.com/nicif/us/academicevalmul
 INSERT INTO Software VALUES (131, "http://www.keysight.com/en/pd-1476554-pn-W4000D/vee-pro-932?cc=US&lc=eng","Agilent VEE","ELEC-2299");
 INSERT INTO Software VALUES (132,"http://www.solidworks.com/sw/products/3d-cad/packages.htm","Solidworks","MECH-3100");
 INSERT INTO Software VALUES (133,"https://bridgecontest.org/resources/download/","West Point Bridge Designer", "MECH-2250");
-INSERT INTO Software VALUES (134,"https://www.oracle.com/applications/primavera/products/project-management.html","Primavera P6 Professional","CIVE-2000"
+INSERT INTO Software VALUES (134,"https://www.oracle.com/applications/primavera/products/project-management.html","Primavera P6 Professional","CIVE-2000");
 INSERT INTO Software VALUES (135,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-2000");
 INSERT INTO Software VALUES (136,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3800");
 INSERT INTO Software VALUES (137,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-2200");
@@ -47,5 +47,4 @@ INSERT INTO Software VALUES (139,"http://www.design-simulation.com/ip/","Interac
 INSERT INTO Software VALUES (140,"http://www.design-simulation.com/ip/","Interactive Physics","CIVE-3500");
 INSERT INTO Software VALUES (141,"http://www.autodesk.com/products/autocad-civil-3d/overview","Civil 3D","CIVE-8500");
 INSERT INTO Software VALUES (142,"http://www.autodesk.com/products/autocad-civil-3d/overview","Civil 3D","CIVE-8550");
-INSERT INTO Software VALUES (143,"http://www.sage.com/us/sage-construction/sage-estimating","Sage Timberline Estimating Extended","CIVE-3200");			     
-			     
+INSERT INTO Software VALUES (143,"http://www.sage.com/us/sage-construction/sage-estimating","Sage Timberline Estimating Extended","CIVE-3200");
