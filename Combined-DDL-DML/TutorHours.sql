@@ -8,6 +8,7 @@ CREATE TABLE `TutorHours` (
 	`EndTime_Str` 	TEXT,
 	FOREIGN KEY(`StudentID`) REFERENCES Tutor(StudentID)
 );
+
 INSERT INTO TutorHours VALUES (1, "Monday", 1, 1000, 1130, "10:00 AM", "11:30 AM");
 INSERT INTO TutorHours VALUES (1, "Tuesday", 2, 1730, 1800, "5:30 PM", "6:00 PM");
 INSERT INTO TutorHours VALUES (1, "Wednesday", 3 ,1700, 2000, "5:00 PM", "8:00 PM");
