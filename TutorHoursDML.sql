@@ -1,0 +1,40 @@
+INSERT INTO TutorHours VALUES (5,"Tuesday",1430,1530);
+INSERT INTO TutorHours VALUES (5,"Friday",1000,1100);
+INSERT INTO TutorHours VALUES (5,"Monday",1330,1530);
+INSERT INTO TutorHours VALUES (5,"Tuesday",1400,1500);
+INSERT INTO TutorHours VALUES (5,"Friday",1000,1200);
+INSERT INTO TutorHours VALUES (6,"Thrusday",0930,1000);
+INSERT INTO TutorHours VALUES (7,"Tuesday",1400,1530);
+INSERT INTO TutorHours VALUES (7,"Thrusday",1300,1400);
+INSERT INTO TutorHours VALUES (7,"Friday",1100,1230);
+INSERT INTO TutorHours VALUES (8,"Monday",1130,1230);
+INSERT INTO TutorHours VALUES (8,"Tuesday",1130,1230);
+INSERT INTO TutorHours VALUES (8,"Thrusday",1130,1230);
+INSERT INTO TutorHours VALUES (8,"Friday",1200,1430);
+INSERT INTO TutorHours VALUES (9,"Thrusday",1830,1900);
+INSERT INTO TutorHours VALUES (9,"Monday",1300,1500);
+INSERT INTO TutorHours VALUES (9,"Tuesday",1400,1500);
+INSERT INTO TutorHours VALUES (10,"Monday",1630,1800);
+INSERT INTO TutorHours VALUES (10,"Tuesday",1300,1600);
+INSERT INTO TutorHours VALUES (11,"Tuesday",1800,2000);
+INSERT INTO TutorHours VALUES (11,"Wednesday",1400,1700);
+INSERT INTO TutorHours VALUES (11,"Thursday",1700,2000);
+INSERT INTO TutorHours VALUES (11,"Monday",1000,1130);
+INSERT INTO TutorHours VALUES (12,"Tuesday",1730,1800);
+INSERT INTO TutorHours VALUES (12,"Wednesday",1700,2000);
+INSERT INTO TutorHours VALUES (12,"Thursday",1700,2000);
+INSERT INTO TutorHours VALUES (13,"Tuesday",1430,2000);
+INSERT INTO TutorHours VALUES (13,"Wednesday",1700,1900);
+INSERT INTO TutorHours VALUES (14,"Tuesday",1000,1130);
+INSERT INTO TutorHours VALUES (15,"Thursday",1500,1530);
+
+
+
+
+
+
+
+
+
+
+
